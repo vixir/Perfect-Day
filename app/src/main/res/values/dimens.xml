@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_icon_top_margin">48dp</dimen>
+    <dimen name="login_title_logo_margin">16dp</dimen>
+    <dimen name="login_title_moto_margin">40dp</dimen>
+    <dimen name="login_button_margin">64dp</dimen>
+    <dimen name="login_reason_margin">28dp</dimen>
+    <dimen name="login_button_margin_bottom">16dp</dimen>
+    <dimen name="login_title_text_size">28dp</dimen>
+    <dimen name="login_moto_left">32dp</dimen>
+    <dimen name="login_moto_right">32dp</dimen>
+    <dimen name="login_button_margin_top">72dp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="login_icon_elevation">6dp</dimen>
+    <dimen name="toolbar_left_margin">16dp</dimen>
+    <dimen name="toolbar_title_left_margin">28dp</dimen>
+    <dimen name="toolbar_image_margin">4dp</dimen>
+    <dimen name="toolbar_image_height">32dp</dimen>
+    <dimen name="toolbar_add_button_margin_end">24dp</dimen>
+
+</resources>

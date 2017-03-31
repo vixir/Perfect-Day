@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/launcher_32px"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/login_icon_top_margin"
+        android:contentDescription="@string/content_desc_app_icon"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.LoginTitle"
+        android:layout_marginTop="@dimen/login_title_logo_margin"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_moto"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginStart="@dimen/login_moto_left"
+        android:layout_marginEnd="@dimen/login_moto_right"
+        android:layout_marginTop="@dimen/login_title_moto_margin"
+        android:textColor="@color/secondaryTextColor"
+        fontPath = "fonts/Roboto-Light.ttf"
+        tools:ignore="MissingPrefix" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/google_button"
+        style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
+        android:layout_marginTop="@dimen/login_button_margin_top"
+        android:layout_marginRight="@dimen/login_button_margin"
+        android:layout_marginLeft="@dimen/login_button_margin"
+        android:layout_marginBottom="@dimen/login_button_margin_bottom"
+        android:text="@string/sign_in_with_google" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_small"
+        android:layout_marginLeft="@dimen/login_reason_margin"
+        android:layout_marginRight="@dimen/login_reason_margin"
+        android:text="@string/app_login_reason"
+        fontPath = "fonts/Roboto-Light.ttf"
+        android:textColor="@color/tertiaryTextColor"
+        tools:ignore="MissingPrefix" />
+
+</LinearLayout>

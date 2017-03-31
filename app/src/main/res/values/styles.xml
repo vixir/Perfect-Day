@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+    <style name="TextAppearance.LoginTitle" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textSize">@dimen/login_title_text_size</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="TextAppearance.BottomBarText" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Montserrat-Thin.ttf</item>
+        <item name="android:textColor">@color/bottom_bar_text_color</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+</resources>

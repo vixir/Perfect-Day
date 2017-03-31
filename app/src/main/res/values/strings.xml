@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Perfect Day</string>
+    <string name="app_moto">Let\'s work together to make today a perfect day and transform you into the person you want to be.</string>
+    <string name="app_login_reason">Google account is used to sync your created progress in the cloud so that you don\'t have to worry about losing progress.</string>
+    <string name="sign_in_cancelled">sign in cancelled</string>
+    <string name="no_internet_connection">no internet connection</string>
+    <string name="unknown_error">unknown error</string>
+    <string name="sign_in_successful">signed in</string>
+    <string name="unknown_sign_in_response">unknown response</string>
+    <string name="today">Today</string>
+    <string name="my_list">List</string>
+    <string name="menu">Menu</string>
+    <string name="content_desc_app_icon">app icon</string>
+    <string name="okay">Okay</string>
+    <string name="content_desc_add_task">Create New Task</string>
+    <string name="welcome_format">Welcome %s</string>
+</resources>
