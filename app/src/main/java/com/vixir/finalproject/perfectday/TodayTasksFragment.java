@@ -91,10 +91,6 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
         mTasksCursorAdapter = new TodayTasksCursorAdapter(getActivity());
         mTodayTaskRecycler.setAdapter(mTasksCursorAdapter);
         mTodayTaskRecycler.setHasFixedSize(false);
-        setHasOptionsMenu(true);
-        TextView title = (TextView) mView.findViewById(R.id.user_name);
-        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Comfortaa-Bold.ttf");
-        title.setTypeface(custom_font);
         mSpectrumPalette.setColors(new int[]{pickerAmber, pickerBlue, pickerOrange, pickerRed, pickerTeal, pickerYellow});
         mSpectrumPalette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener() {
             @Override

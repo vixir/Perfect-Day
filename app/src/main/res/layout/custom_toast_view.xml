@@ -9,6 +9,6 @@
     <TextView android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fontPath = "fonts/Montserrat-Black.ttf"
+        fontPath = "fonts/Montserrat-Light.ttf"
         tools:ignore="MissingPrefix" />
 </LinearLayout>

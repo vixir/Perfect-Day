@@ -15,4 +15,13 @@
     <string name="content_desc_add_task">Create New Task</string>
     <string name="welcome_format">Welcome %s</string>
     <string name="press_toggle_complete">Radio Button to toggle task complete</string>
+    <string name="profile_menu">Menu</string>
+    <string name="logout">logout</string>
+    <string name="feedback_string">feedback</string>
+    <string name="invite">invite</string>
+    <string name="rate">rate</string>
+    <string name="about">about</string>
+    <string name="mail_subject">Perfect Day Feedback</string>
+    <string name="my_email">vivk274@gmail.com</string>
+    <string name="invite_message">What\'s your perfect day like?</string>
 </resources>

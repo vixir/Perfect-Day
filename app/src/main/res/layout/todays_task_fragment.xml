@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/toolbar_title_left_margin"
                 android:text="@string/app_name"
-                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.Toolbar"
                 />
 
             <RelativeLayout

@@ -1,17 +1,17 @@
 <tabs>
     <tab
         id="@+id/bot_bar_today"
-        icon="@drawable/completed_tasks"
+        icon="@drawable/ic_concentric_circles"
         title="@string/today"
     />
     <tab
         id="@+id/bot_bar_list"
-        icon="@drawable/ic_layers"
+        icon="@drawable/ic_list_circular_button"
         title="@string/my_list"
         />
     <tab
         id="@+id/bot_bar_more"
-        icon="@drawable/horizontal_lines"
+        icon="@drawable/ic_menu_circular_button"
         title="Menu"
         />
 </tabs>
