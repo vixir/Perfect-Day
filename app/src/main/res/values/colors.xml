@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#D32F2F</color>
     <color name="bottom_bar_text_color">#8C933EC5</color>
     <color name="primaryTextColor">#D9000000</color>
     <color name="secondaryTextColor">#8C000000</color>
@@ -26,4 +26,10 @@
     <color name="brown">#7A5547</color>
     <color name="grey">#9D9D9D</color>
     <color name="blue_grey">#5E7C8B</color>
+    <color name="picker_red">#ef9a9a</color>
+    <color name="picker_amber">#ffe082</color>
+    <color name="picker_teal">#80cbc4</color>
+    <color name="picker_blue">#bbdefb</color>
+    <color name="picker_orange">#ffab91</color>
+    <color name="picker_yellow">#fbc02d</color>
 </resources>

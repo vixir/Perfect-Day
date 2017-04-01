@@ -1,6 +1,7 @@
 package com.vixir.finalproject.perfectday;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -27,6 +28,7 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -102,6 +104,11 @@ public class LoginActivity extends AppCompatActivity {
 
             showWhiteSnackBar(R.string.unknown_sign_in_response);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     private void showWhiteSnackBar(int signed_in_message) {

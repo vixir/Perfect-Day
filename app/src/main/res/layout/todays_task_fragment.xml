@@ -8,7 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp">
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/todays_task_tool_bar"
@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/toolbar_title_left_margin"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.Toolbar" />
+                android:textSize="16sp"
+                />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -52,26 +53,30 @@
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-    <include layout="@layout/task_item_picker"
-        android:paddingTop="?attr/actionBarSize"
-        android:id="@+id/picker_view"/>
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/myScrollingContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
+           >
+
+            <include
+                android:id="@+id/picker_view"
+                layout="@layout/task_item_picker"
+                android:visibility="gone"
+                />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/taskitems_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="?attr/actionBarSize"
-                android:layout_alignParentBottom="true"/>
+                android:layout_below="@id/picker_view"
+                 />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 

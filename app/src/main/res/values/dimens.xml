@@ -17,5 +17,7 @@
     <dimen name="toolbar_image_margin">4dp</dimen>
     <dimen name="toolbar_image_height">32dp</dimen>
     <dimen name="toolbar_add_button_margin_end">24dp</dimen>
+    <dimen name="toggle_button_width">32dp</dimen>
+    <dimen name="toggle_button_height">32dp</dimen>
 
 </resources>

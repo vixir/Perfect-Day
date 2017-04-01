@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@color/tw__solid_white"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/check_complete"
+        android:layout_width="@dimen/toggle_button_width"
+        android:layout_height="@dimen/toggle_button_height"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="24dp"
+        android:clickable="true"
+        android:saveEnabled="true"
+        android:contentDescription="@string/press_toggle_complete"
+        android:src="@drawable/ic_radio_button_unchecked_black_24px"
+        />
     <TextView
         android:id="@+id/list_item_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        fontPath = "fonts/Roboto-Bold.ttf"
+        android:gravity="center_vertical"
+        android:paddingBottom="4dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        tools:ignore="MissingPrefix"
+        />
+</LinearLayout>

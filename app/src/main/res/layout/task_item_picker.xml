@@ -3,19 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="?attr/actionBarSize">
+   >
 
     <EditText
         android:id="@+id/task_description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/app_name" />
+        android:gravity="center"
+        android:padding="16dp"
+        android:hint="@string/app_name"
+        android:background="@android:color/transparent"
+        />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal">
+
+        <com.thebluealliance.spectrum.SpectrumPalette
+            android:id="@+id/color_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.thebluealliance.spectrum.SpectrumPalette>
+    </ScrollView>
 
     <Button
         android:id="@+id/create_ok_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/okay"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="@string/okay" />
 
 </LinearLayout>
