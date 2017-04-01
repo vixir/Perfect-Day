@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -95,7 +97,13 @@ public class MoreInfoFragment extends Fragment {
 
     @OnClick(R.id.about)
     public void onClickAbout() {
-
+            WebView view = (WebView) LayoutInflater.from(getContext()).inflate(R.layout.dialog_licenses, null);
+            view.loadUrl("file:///android_asset/licence.html");
+            new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert)
+                    .setTitle(getString(R.string.action_licenses))
+                    .setView(view)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
     }
 
     @OnClick(R.id.logout)

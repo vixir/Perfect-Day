@@ -20,8 +20,9 @@
     <string name="feedback_string">feedback</string>
     <string name="invite">invite</string>
     <string name="rate">rate</string>
-    <string name="about">about</string>
+    <string name="about">licences</string>
     <string name="mail_subject">Perfect Day Feedback</string>
     <string name="my_email">vivk274@gmail.com</string>
     <string name="invite_message">What\'s your perfect day like?</string>
+    <string name="action_licenses">Licenses</string>
 </resources>

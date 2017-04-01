@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "475987824122",
+    "firebase_url": "https://perfect-day-fc894.firebaseio.com",
+    "project_id": "perfect-day-fc894",
+    "storage_bucket": "perfect-day-fc894.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475987824122:android:75bd566862c459c3",
+        "android_client_info": {
+          "package_name": "com.vixir.finalproject.perfectday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475987824122-gu6jcmj32p29rd48v0riptp6dn76dkf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vixir.finalproject.perfectday",
+            "certificate_hash": "f760e8d20c24c45884768936bc30b4edfe907682"
+          }
+        },
+        {
+          "client_id": "475987824122-gp97hrj7ba5bkva59h5g0m4pf214c3gv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB907cQNd_ShR0RT2Ax2OdiYMnjoDjuxsc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475987824122-gp97hrj7ba5bkva59h5g0m4pf214c3gv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
