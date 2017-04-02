@@ -1,6 +1,7 @@
 package com.vixir.finalproject.perfectday;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -121,6 +122,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
         if (description.length() == 0) {
             return;
         }
+        //To DO only numbers and letters
         showHide();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION, description);

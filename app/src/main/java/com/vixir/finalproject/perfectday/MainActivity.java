@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getActionBar();
         if (null != actionBar) actionBar.hide();
 
+
+        UpdateProgressUtilities.scheduleUpdateProgressReminder(this);
+
         mBottomBar.setOnTabSelectListener(
                 new OnTabSelectListener() {
                     @Override
