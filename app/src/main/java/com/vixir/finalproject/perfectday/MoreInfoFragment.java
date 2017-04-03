@@ -123,6 +123,7 @@ public class MoreInfoFragment extends Fragment {
                         getActivity().finish();
                     }
                 });
+        getActivity().deleteDatabase(TaskItemsContract.TaskItemsColumns.TABLE_NAME);
     }
 
 }

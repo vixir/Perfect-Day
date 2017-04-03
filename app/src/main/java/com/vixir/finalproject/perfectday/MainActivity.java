@@ -30,10 +30,7 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         ActionBar actionBar = getActionBar();
         if (null != actionBar) actionBar.hide();
-
-
         UpdateProgressUtilities.scheduleUpdateProgressReminder(this);
-
         mBottomBar.setOnTabSelectListener(
                 new OnTabSelectListener() {
                     @Override

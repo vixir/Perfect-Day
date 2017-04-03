@@ -17,6 +17,9 @@ public class UpdateProgressFirebaseJobService extends JobService {
         updateProgressIntent.setAction(UpdateProgressTasks.ACTION_SEND_DATA_TO_WIDGET);
         this.startService(updateProgressIntent);
 
+        updateProgressIntent.setAction(UpdateProgressTasks.ACTION_UPDATE_FIREBASE_DB);
+        this.startService(updateProgressIntent);
+
         mBackgroundTask = new AsyncTask() {
 
             @Override

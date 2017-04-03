@@ -41,12 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         View decorView = getWindow().getDecorView();
-        // Hide the status bar.
-
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
         ActionBar actionBar = getActionBar();
         if (null != actionBar) actionBar.hide();
         ButterKnife.bind(this);
@@ -78,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
             // Successfully signed in
             if (resultCode == ResultCodes.OK) {
                 showWhiteSnackBar(R.string.sign_in_successful);
+                Intent updateProgressIntent = new Intent(this, UpdateProgressIntentService.class);
+                updateProgressIntent.setAction(UpdateProgressTasks.ACTION_FETCH_FIREBASE_DB);
+                this.startService(updateProgressIntent);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

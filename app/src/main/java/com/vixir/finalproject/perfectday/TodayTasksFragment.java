@@ -81,8 +81,6 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
     @BindView(R.id.color_picker)
     SpectrumPalette mSpectrumPalette;
 
-    ImageView imageView;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -165,6 +163,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
 
             @Override
             public Cursor loadInBackground() {
+                //to do Make it private again
                 try {
                     return getActivity().getContentResolver().query(TaskItemsContract.TaskItemsColumns.CONTENT_URI,
                             null,
