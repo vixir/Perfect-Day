@@ -22,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCursorAdapter.ItemViewHolder> {
@@ -57,21 +58,22 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         final int isFinished = mCursor.getInt(isFinishedIndex);
         holder.mDescriptionTextView.setText(description);
         holder.mDescriptionTextView.setTextColor(color);
-        final ImageView mButton = holder.mButton;
+        ToggleButton mButton = holder.mButton;
         if (isFinished == 0) {
-            mButton.setImageDrawable(mContext.getDrawable(R.drawable.ic_radio_button_unchecked_black_24px));
-            Drawable drawable = mButton.getDrawable();
+            mButton.setChecked(false);
+            Drawable drawable = mButton.getBackground();
             drawable = DrawableCompat.wrap(drawable);
             drawable = drawable.mutate();
             DrawableCompat.setTint(drawable, color);
             DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP);
         } else {
-            mButton.setImageDrawable(mContext.getDrawable(R.drawable.ic_radio_button_checked_black_24px));
-            Drawable drawable = mButton.getDrawable();
+            mButton.setChecked(true);
+            Drawable drawable = mButton.getBackground();
             drawable = DrawableCompat.wrap(drawable);
-            drawable = drawable. mutate();
+            drawable = drawable.mutate();
             DrawableCompat.setTint(drawable, color);
             DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP);
+
         }
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,20 +81,8 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
                 ContentValues contentValues = new ContentValues();
                 if (isFinished == 0) {
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 1);
-                    Drawable drawable = mContext.getDrawable(R.drawable.ic_radio_button_checked_black_24px);
-                    drawable = DrawableCompat.wrap(drawable);
-                    drawable = drawable. mutate();
-                    DrawableCompat.setTint(drawable, color);
-                    DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP);
-                    mButton.setImageDrawable(drawable);
                 } else {
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 0);
-                    Drawable drawable = mContext.getDrawable(R.drawable.ic_radio_button_unchecked_black_24px);
-                    mButton.setImageDrawable(drawable);
-                    drawable = DrawableCompat.wrap(drawable);
-                    drawable = drawable. mutate();
-                    DrawableCompat.setTint(drawable, color);
-                    DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP);
                 }
                 Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
@@ -126,14 +116,14 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
     class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView mDescriptionTextView;
         View mMainView;
-        ImageView mButton;
+        ToggleButton mButton;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
-            Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(),  "fonts/Montserrat-Regular.ttf");
+            Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "fonts/Montserrat-Regular.ttf");
             mDescriptionTextView.setTypeface(custom_font);
-            mButton = (ImageView) itemView.findViewById(R.id.check_complete);
+            mButton = (ToggleButton) itemView.findViewById(R.id.check_complete);
             mMainView = itemView;
         }
     }

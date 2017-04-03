@@ -6,16 +6,16 @@
     android:orientation="horizontal"
     android:background="@color/tw__solid_white"
     android:padding="10dp">
-    <ImageView
+    <ToggleButton
         android:id="@+id/check_complete"
         android:layout_width="@dimen/toggle_button_width"
         android:layout_height="@dimen/toggle_button_height"
+        android:textOff=""
+        android:textOn=""
         android:layout_gravity="center_vertical"
         android:layout_marginStart="24dp"
-        android:clickable="true"
-        android:saveEnabled="true"
+        android:background="@drawable/check_complete"
         android:contentDescription="@string/press_toggle_complete"
-        android:src="@drawable/ic_radio_button_unchecked_black_24px"
         />
     <TextView
         android:id="@+id/list_item_description"
