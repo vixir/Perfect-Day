@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/launcher_32px"
+        android:src="@mipmap/ic_launcher"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/login_icon_top_margin"
         android:contentDescription="@string/content_desc_app_icon"/>
