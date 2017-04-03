@@ -16,19 +16,20 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.R.attr.banner;
 import static android.R.attr.data;
 
 
@@ -41,8 +42,11 @@ public class MoreInfoFragment extends Fragment {
     @BindView(R.id.profile_name)
     protected TextView mProfileName;
 
+    @BindString(R.string.banner_ad_unit_id)
+    protected String adUnitId;
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    private AdView adView;
 
     @Nullable
     @Override
@@ -55,6 +59,9 @@ public class MoreInfoFragment extends Fragment {
         String strMeatFormat = getResources().getString(R.string.welcome_format);
         String strMeatMsg = String.format(strMeatFormat, auth.getCurrentUser().getDisplayName());
         mProfileName.setText(strMeatMsg);
+        adView = (AdView) mView.findViewById(R.id.adView);
+        AdRequest builder = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        adView.loadAd(builder);
         return mView;
     }
 
@@ -97,13 +104,13 @@ public class MoreInfoFragment extends Fragment {
 
     @OnClick(R.id.about)
     public void onClickAbout() {
-            WebView view = (WebView) LayoutInflater.from(getContext()).inflate(R.layout.dialog_licenses, null);
-            view.loadUrl("file:///android_asset/licence.html");
-            new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert)
-                    .setTitle(getString(R.string.action_licenses))
-                    .setView(view)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
+        WebView view = (WebView) LayoutInflater.from(getContext()).inflate(R.layout.dialog_licenses, null);
+        view.loadUrl("file:///android_asset/licence.html");
+        new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert)
+                .setTitle(getString(R.string.action_licenses))
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     @OnClick(R.id.logout)

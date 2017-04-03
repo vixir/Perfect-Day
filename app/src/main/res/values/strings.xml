@@ -18,6 +18,7 @@
     <string name="profile_menu">Menu</string>
     <string name="logout">logout</string>
     <string name="feedback_string">feedback</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="invite">invite</string>
     <string name="rate">rate</string>
     <string name="about">licences</string>
