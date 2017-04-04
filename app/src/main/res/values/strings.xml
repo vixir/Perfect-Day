@@ -26,4 +26,6 @@
     <string name="my_email">vivk274@gmail.com</string>
     <string name="invite_message">What\'s your perfect day like?</string>
     <string name="action_licenses">Licenses</string>
+    <string name="all_tasks">Created List</string>
+    <string name="include_in_today">add this to today\'s list.</string>
 </resources>

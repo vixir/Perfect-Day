@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@color/tw__solid_white"
+    android:padding="10dp">
+    <ImageButton
+        android:id="@+id/list_add_today"
+        android:layout_width="@dimen/toggle_button_width"
+        android:layout_height="@dimen/toggle_button_height"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/ic_restart"
+        android:contentDescription="@string/include_in_today"
+        />
+    <TextView
+        android:id="@+id/task_list_item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        fontPath = "fonts/Roboto-Bold.ttf"
+        android:gravity="center_vertical"
+        android:paddingBottom="4dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        tools:ignore="MissingPrefix"
+        />
+</LinearLayout>

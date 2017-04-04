@@ -11,7 +11,7 @@
     <dimen name="login_moto_right">32dp</dimen>
     <dimen name="login_button_margin_top">72dp</dimen>
     <dimen name="text_size_small">12sp</dimen>
-    <dimen name="appbar_title_size">16sp</dimen>
+    <dimen name="appbar_title_size">17sp</dimen>
     <dimen name="login_icon_elevation">6dp</dimen>
     <dimen name="toolbar_left_margin">16dp</dimen>
     <dimen name="toolbar_title_left_margin">28dp</dimen>
