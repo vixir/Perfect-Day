@@ -51,18 +51,18 @@ public class ListTasksCursorAdapter extends RecyclerView.Adapter<ListTasksCursor
         int idIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns._ID);
         int itemDescriptionIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION);
         int backColor = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR);
-        int isFinishedIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED);
+        int isTodayIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY);
         mCursor.moveToPosition(position);
         final int id = mCursor.getInt(idIndex);
         holder.itemView.setTag(id);
         String description = mCursor.getString(itemDescriptionIndex);
-        final int color = mCursor.getInt(backColor);
-        final int isToday = mCursor.getInt(isFinishedIndex);
+        int color = mCursor.getInt(backColor);
+        int isToday = mCursor.getInt(isTodayIndex);
         holder.mDescriptionTextView.setText(description);
         holder.mDescriptionTextView.setTextColor(color);
         final ImageButton mButton = holder.mButton;
-        if (isToday == 0) {
-            mButton.setVisibility(View.GONE);
+        if (isToday == 1) {
+            mButton.setVisibility(View.INVISIBLE);
         } else {
             Drawable drawable = mButton.getBackground();
             drawable = DrawableCompat.wrap(drawable);
@@ -73,12 +73,13 @@ public class ListTasksCursorAdapter extends RecyclerView.Adapter<ListTasksCursor
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // do in background
                 ContentValues contentValues = new ContentValues();
-                contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, 0);
+                contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, 1);
                 Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
                 mContext.getContentResolver().update(uri, contentValues, null, null);
-                mButton.setVisibility(View.GONE);
+                mButton.setVisibility(View.INVISIBLE);
             }
         });
 

@@ -73,8 +73,8 @@ public class UpdateProgressTasks {
             TaskItem taskItem = new TaskItem();
             taskItem.setColor(cursor.getInt(colorIndex));
             taskItem.setDescription(cursor.getString(itemDescriptionIndex));
-            taskItem.setIsFinished(isFinishedIndex);
-            taskItem.setIsToday(isTodayIndex);
+            taskItem.setIsFinished(cursor.getInt(isFinishedIndex));
+            taskItem.setIsToday(cursor.getInt(isTodayIndex));
             taskItem.setCreatedOn(cursor.getString(createdOn));
             usersTask.put(cursor.getString(idIndex), taskItem);
         }

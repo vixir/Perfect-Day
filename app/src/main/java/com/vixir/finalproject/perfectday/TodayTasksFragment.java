@@ -156,7 +156,8 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
             public Cursor loadInBackground() {
                 //to do Make it private again
                 try {
-                    return getActivity().getContentResolver().query(TaskItemsContract.TaskItemsColumns.CONTENT_URI,
+                    Uri todaysUri = TaskItemsContract.TaskItemsColumns.CONTENT_URI.buildUpon().appendPath(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY).appendPath("1").build();
+                    return getActivity().getContentResolver().query(todaysUri,
                             null,
                             null,
                             null,

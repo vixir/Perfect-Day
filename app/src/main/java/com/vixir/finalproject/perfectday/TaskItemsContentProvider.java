@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import static com.vixir.finalproject.perfectday.TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY;
 import static com.vixir.finalproject.perfectday.TaskItemsContract.TaskItemsColumns.TABLE_NAME;
 
 
@@ -27,7 +28,7 @@ public class TaskItemsContentProvider extends ContentProvider {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(TaskItemsContract.AUTHORITY, TaskItemsContract.PATH_TASK_ITEMS, ITEM_TASKS);
         uriMatcher.addURI(TaskItemsContract.AUTHORITY, TaskItemsContract.PATH_TASK_ITEMS + "/#", ITEM_TASKS_WITH_ID);
-        uriMatcher.addURI(TaskItemsContract.AUTHORITY, TaskItemsContract.PATH_TASK_ITEMS + "/" + TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY + "/#", ITEM_TASKS_TODAY);
+        uriMatcher.addURI(TaskItemsContract.AUTHORITY, TaskItemsContract.PATH_TASK_ITEMS + "/" + COLUMN_NAME_IS_TODAY + "/#", ITEM_TASKS_TODAY);
         return uriMatcher;
     }
 
@@ -57,7 +58,7 @@ public class TaskItemsContentProvider extends ContentProvider {
                 break;
             }
             case ITEM_TASKS_TODAY: {
-                String isToday = uri.getPathSegments().get(1);
+                String isToday = uri.getPathSegments().get(2);
                 String mSelection = TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY + " = ?";
                 String[] mSelectionArgs = new String[]{isToday};
                 returnCursor = db.query(TABLE_NAME, projection, mSelection, mSelectionArgs, null, null, null);
@@ -82,7 +83,7 @@ public class TaskItemsContentProvider extends ContentProvider {
             case ITEM_TASKS_WITH_ID:
                 return "vnd.android.cursor.item" + "/" + TaskItemsContract.AUTHORITY + "/" + TaskItemsContract.PATH_TASK_ITEMS;
             case ITEM_TASKS_TODAY:
-                return "vnd.android.cursor.dir" + "/" + TaskItemsContract.AUTHORITY + "/" + TaskItemsContract.PATH_TASK_ITEMS;
+                return "vnd.android.cursor.dir" + "/" + TaskItemsContract.AUTHORITY + "/" + TaskItemsContract.PATH_TASK_ITEMS + "/" + COLUMN_NAME_IS_TODAY;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
