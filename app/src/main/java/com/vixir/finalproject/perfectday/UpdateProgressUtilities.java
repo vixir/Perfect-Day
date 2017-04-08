@@ -1,6 +1,9 @@
 package com.vixir.finalproject.perfectday;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.firebase.jobdispatcher.Constraint;
@@ -11,6 +14,7 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class UpdateProgressUtilities {
@@ -24,9 +28,17 @@ public class UpdateProgressUtilities {
     private static boolean sInitialized;
 
     synchronized public static void scheduleUpdateProgressReminder(@NonNull final Context context) {
-
-        if (sInitialized) return;
-
+        if (sInitialized) {
+            return;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 42);
+        calendar.set(Calendar.SECOND, 00);
+        Intent intentAlarm = new Intent(context, UpdateDayAlarmReciever.class);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, PendingIntent.getBroadcast(context, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
 

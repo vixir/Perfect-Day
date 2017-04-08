@@ -26,6 +26,8 @@ public class TaskItemsDbHelper extends SQLiteOpenHelper {
                 + TaskItemsColumns.COLUMN_NAME_COLOR + " TEXT NOT NULL DEFAULT '#ffffff', "
                 + TaskItemsColumns.COLUMN_NAME_IS_FINISHED + " INTEGER NOT NULL DEFAULT 0, "
                 + TaskItemsColumns.COLUMN_NAME_IS_TODAY + " INTEGER NOT NULL DEFAULT 1, "
+                + TaskItemsColumns.COLUMN_NAME_STREAK + " INTEGER NOT NULL DEFAULT 0, "
+                + TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES + " TEXT NOT NULL DEFAULT '{\"uniqueDays\":[]}', "
                 + TaskItemsColumns.COLUMN_NAME_CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP "
                 + ", CONSTRAINT unique_task_description UNIQUE (task_description) ON CONFLICT REPLACE"
                 + " );";

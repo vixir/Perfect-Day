@@ -26,6 +26,8 @@ public class TaskItemsContract {
         public static final String COLUMN_NAME_IS_FINISHED = "is_finished";
         public static final String COLUMN_NAME_IS_TODAY = "is_today";
         public static final String COLUMN_NAME_CREATED_AT = "created_at";
+        public static final String COLUMN_NAME_STREAK = "streak";
+        public static final String COLUMN_NAME_COMPLETED_DATES = "task_date_list";
     }
 
 }

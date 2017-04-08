@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,36 +31,30 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         ActionBar actionBar = getActionBar();
         if (null != actionBar) actionBar.hide();
+        UpdateProgressTasks.updateDateInformation(this);
         UpdateProgressUtilities.scheduleUpdateProgressReminder(this);
         mBottomBar.setOnTabSelectListener(
                 new OnTabSelectListener() {
                     @Override
                     public void onTabSelected(@IdRes int tabId) {
-                        Fragment fragment = null;
-                        Class fragmentClass;
+                        Fragment fragment;
                         switch (tabId) {
                             case R.id.bot_bar_today:
-                                fragmentClass = TodayTasksFragment.class;
+                                fragment = new TodayTasksFragment();
                                 break;
                             case R.id.bot_bar_list:
-                                fragmentClass = ListTasksFragment.class;
+                                fragment = new ListTasksFragment();
                                 break;
                             case R.id.bot_bar_more:
-                                fragmentClass = MoreInfoFragment.class;
+                                fragment = new MoreInfoFragment();
                                 break;
                             default:
-                                fragmentClass = TodayTasksFragment.class;
-                        }
-                        try {
-                            fragment = (Fragment) fragmentClass.newInstance();
-                        } catch (InstantiationException e) {
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
+                                fragment = new TodayTasksFragment();
                         }
                         FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
+                        FragmentTransaction ft = fragmentManager.beginTransaction();
+                        ft.replace(R.id.flContent, fragment, fragment.getClass().getName());
+                        ft.commit();
                     }
                 });
     }

@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-   >
+    android:padding="10dp">
 
-    <EditText
-        android:id="@+id/task_description_input"
+    <TextView
+        android:id="@+id/title_dialog"
+        fontPath="fonts/BalooBhaina-Regular.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="16dp"
-        android:hint="@string/app_name"
-        android:background="@android:color/transparent"
-        />
+        android:paddingBottom="@dimen/dialog_title_padding"
+        android:text="@string/new_task"
+        tools:ignore="MissingPrefix" />
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/task_description_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:hint="@string/app_name"
+        android:padding="@dimen/add_edit_text_padding"
+        android:textCursorDrawable="@null"
+        app:met_errorColor="@color/picker_red"
+        app:met_maxCharacters="25"
+        app:met_minCharacters="2"
+        app:met_typeface="fonts/Montserrat-Regular.ttf" />
+
+    <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="horizontal">
+        android:scrollIndicators="bottom">
 
         <com.thebluealliance.spectrum.SpectrumPalette
             android:id="@+id/color_picker"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
         </com.thebluealliance.spectrum.SpectrumPalette>
-    </ScrollView>
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/create_ok_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/okay" />
+        android:layout_marginBottom="@dimen/okay_button_margin_bot"
+        android:layout_marginLeft="@dimen/okay_button_margin_left_right"
+        android:layout_marginRight="@dimen/okay_button_margin_left_right"
+        android:layout_marginTop="@dimen/okay_button_margin_top"
+        android:backgroundTint="@color/teal"
+        android:text="@string/okay"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

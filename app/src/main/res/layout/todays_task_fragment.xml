@@ -7,8 +7,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/todays_task_tool_bar"
@@ -31,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/toolbar_title_left_margin"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.Toolbar"
-                />
+                android:textAppearance="@style/TextAppearance.Toolbar" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -62,21 +60,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-           >
-
-            <include
-                android:id="@+id/picker_view"
-                layout="@layout/task_item_picker"
-                android:visibility="gone"
-                />
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/taskitems_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/picker_view"
-                 />
+                android:layout_height="match_parent" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 

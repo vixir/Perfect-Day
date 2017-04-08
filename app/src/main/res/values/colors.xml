@@ -7,6 +7,8 @@
     <color name="primaryTextColor">#D9000000</color>
     <color name="secondaryTextColor">#8C000000</color>
     <color name="tertiaryTextColor">#66000000</color>
+    <color name="very_light_red">#FFEBEE</color>
+    <color name="very_light_gray">#FAFAFA</color>
     <color name="red">#F6402C</color>
     <color name="pink">#EB1460</color>
     <color name="purple">#9C1AB1</color>

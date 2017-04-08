@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -48,6 +49,9 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
     @BindView(R.id.listtaskitems_recycler)
     RecyclerView mListTaskRecycler;
 
+    @BindColor(R.color.very_light_gray)
+    int veryLightGray;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +63,16 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
         mListTaskRecycler.setHasFixedSize(false);
         initSwipe();
         getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
+        ListTasksCursorAdapter.ViewHolderClick viewHolderClick = new ListTasksCursorAdapter.ViewHolderClick() {
+            @Override
+            public void onClick(int id) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                CalenderDialogFragment calenderDialogFragment = CalenderDialogFragment.newInstance(id);
+                calenderDialogFragment.setTargetFragment(ListTasksFragment.this, 400);
+                calenderDialogFragment.show(fm, "show_calender");
+            }
+        };
+        mTasksCursorAdapter.setOnViewHolderClickListener(viewHolderClick);
         return mView;
     }
 
@@ -156,10 +170,10 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
                     float width = height / 3;
 
                     if (dX < 0) {
-                        p.setColor(Color.parseColor("#d32f2f"));
+                        p.setColor(veryLightGray);
                         RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
                         c.drawRect(background, p);
-                        icon = drawableToBitmap(getResources().getDrawable(R.drawable.ic_delete_white_24px));
+                        icon = drawableToBitmap(getResources().getDrawable(R.drawable.ic_rubbish_bin));
                         RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
                         c.drawBitmap(icon, null, icon_dest, p);
                     }

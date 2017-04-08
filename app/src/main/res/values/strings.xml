@@ -28,4 +28,9 @@
     <string name="action_licenses">Licenses</string>
     <string name="all_tasks">Created List</string>
     <string name="include_in_today">add this to today\'s list.</string>
+    <string name="new_task">Perfect Day Task</string>
+    <string name="edit_dialog_title">Edit Perfect Day Task</string>
+    <string name="invalid_task">Please enter valid input</string>
+    <string name="empty_task">Empty task don\'t get stuff done.</string>
+    <string name="_00">00</string>
 </resources>
