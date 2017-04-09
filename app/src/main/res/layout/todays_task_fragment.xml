@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/tw__solid_white"
                 android:gravity="end"
+                android:textColor="@color/grey"
                 android:paddingEnd="12dp"
                 android:paddingTop="16dp"
                 android:text="@string/streak" />

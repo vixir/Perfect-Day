@@ -11,7 +11,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,8 +35,10 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
 
     private Context mContext;
     private Cursor mCursor;
+    private LoaderManager.LoaderCallbacks mLoaderCallbacks;
 
-    public TodayTasksCursorAdapter(Context context) {
+    public TodayTasksCursorAdapter(Context context, LoaderManager.LoaderCallbacks mLoaderCallbacks) {
+        this.mLoaderCallbacks = mLoaderCallbacks;
         this.mContext = context;
     }
 
@@ -52,15 +58,19 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         int itemDescriptionIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION);
         int backColor = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR);
         int isFinishedIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED);
+        int streakIndex = mCursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK);
         mCursor.moveToPosition(position);
         final int id = mCursor.getInt(idIndex);
         holder.itemView.setTag(id);
         String description = mCursor.getString(itemDescriptionIndex);
         final int color = mCursor.getInt(backColor);
         final int isFinished = mCursor.getInt(isFinishedIndex);
+        final int streak = mCursor.getInt(streakIndex);
         holder.mDescriptionTextView.setText(description);
         holder.mDescriptionTextView.setTextColor(color);
-        ToggleButton mButton = holder.mButton;
+        holder.mStreakText.setText(streak + "");
+        holder.mStreakText.setTextColor(color);
+        final ToggleButton mButton = holder.mButton;
         if (isFinished == 0) {
             mButton.setChecked(false);
             Drawable drawable = mButton.getBackground();
@@ -80,15 +90,32 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentValues contentValues = new ContentValues();
-                if (isFinished == 0) {
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 1);
-                } else {
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 0);
-                }
-                Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
-                uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
-                mContext.getContentResolver().update(uri, contentValues, null, null);
+                final ContentValues contentValues = new ContentValues();
+                new AsyncTask<Integer, Void, Integer>() {
+                    @Override
+                    protected Integer doInBackground(Integer... params) {
+                        int finalStreak = 0;
+                        if (params[0] == 0) {
+                            finalStreak = streak + 1;
+                            contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, finalStreak);
+                            contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 1);
+                        } else {
+                            finalStreak = streak - 1;
+                            contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, finalStreak);
+                            contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 0);
+                        }
+                        Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
+                        uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
+                        mContext.getContentResolver().update(uri, contentValues, null, null);
+                        return finalStreak;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Integer finalStreak) {
+                        ((FragmentActivity) mContext).getSupportLoaderManager().restartLoader(0, null, mLoaderCallbacks);
+                        super.onPostExecute(finalStreak);
+                    }
+                }.execute(isFinished);
             }
         });
 
@@ -119,11 +146,13 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         TextView mDescriptionTextView;
         View mMainView;
         ToggleButton mButton;
+        TextView mStreakText;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
             mButton = (ToggleButton) itemView.findViewById(R.id.check_complete);
+            mStreakText = (TextView) itemView.findViewById(R.id.streak);
             mMainView = itemView;
         }
     }

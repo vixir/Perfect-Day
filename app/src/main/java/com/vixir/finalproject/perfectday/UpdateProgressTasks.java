@@ -132,12 +132,16 @@ public class UpdateProgressTasks {
             int isFinishedIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED);
             int isTodayIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY);
             int createdOn = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_CREATED_AT);
+            int streak = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK);
+            int dateList = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES);
             TaskItem taskItem = new TaskItem();
             taskItem.setColor(cursor.getInt(colorIndex));
             taskItem.setDescription(cursor.getString(itemDescriptionIndex));
             taskItem.setIsFinished(cursor.getInt(isFinishedIndex));
             taskItem.setIsToday(cursor.getInt(isTodayIndex));
             taskItem.setCreatedOn(cursor.getString(createdOn));
+            taskItem.setStreak(cursor.getInt(streak));
+            taskItem.setListDates(cursor.getString(dateList));
             usersTask.put(cursor.getString(idIndex), taskItem);
         }
         cursor.close();
@@ -165,6 +169,8 @@ public class UpdateProgressTasks {
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, value.getIsToday()); // no boolean in content providers
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR, value.getColor());
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_CREATED_AT, System.currentTimeMillis());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, value.getStreak());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES, value.getListDates());
                     contentValuesArray[i++] = contentValues;
                 }
                 int uri = context.getContentResolver().bulkInsert(TaskItemsContract.TaskItemsColumns.CONTENT_URI, contentValuesArray);

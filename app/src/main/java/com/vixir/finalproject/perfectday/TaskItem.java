@@ -37,6 +37,8 @@ public class TaskItem {
     private int isFinished;
     private int isToday;
     private String createdOn;
+    private int streak;
+    private String listDates;
 
 
     public int getIsFinished() {
@@ -53,5 +55,21 @@ public class TaskItem {
 
     public void setIsToday(int isToday) {
         this.isToday = isToday;
+    }
+
+    public int getStreak() {
+        return streak;
+    }
+
+    public void setStreak(int streak) {
+        this.streak = streak;
+    }
+
+    public String getListDates() {
+        return listDates;
+    }
+
+    public void setListDates(String listDates) {
+        this.listDates = listDates;
     }
 }

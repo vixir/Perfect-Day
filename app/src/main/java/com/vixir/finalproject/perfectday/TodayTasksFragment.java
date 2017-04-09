@@ -61,7 +61,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
         mView = inflater.inflate(R.layout.todays_task_fragment, container, false);
         ButterKnife.bind(this, mView);
         mTodayTaskRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mTasksCursorAdapter = new TodayTasksCursorAdapter(getActivity());
+        mTasksCursorAdapter = new TodayTasksCursorAdapter(getActivity(), this);
         mTodayTaskRecycler.setAdapter(mTasksCursorAdapter);
         mTodayTaskRecycler.setHasFixedSize(false);
         initSwipe();
