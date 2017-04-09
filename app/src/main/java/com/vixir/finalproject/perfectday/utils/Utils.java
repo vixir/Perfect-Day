@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.utils;
 
 import android.content.ContentValues;
 import android.graphics.Bitmap;
@@ -8,6 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
+
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 
 public class Utils {
 

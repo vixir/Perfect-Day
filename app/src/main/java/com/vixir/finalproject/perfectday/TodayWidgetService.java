@@ -6,13 +6,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.style.StrikethroughSpan;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-import android.widget.TextView;
 
-import java.util.ArrayList;
-
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import static android.os.Binder.clearCallingIdentity;
 import static android.os.Binder.restoreCallingIdentity;
 

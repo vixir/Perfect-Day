@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.model;
 
 public class TaskItem {
 

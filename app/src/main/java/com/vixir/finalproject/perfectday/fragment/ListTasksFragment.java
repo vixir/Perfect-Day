@@ -1,6 +1,5 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.fragment;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,19 +24,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.thebluealliance.spectrum.SpectrumPalette;
+import com.vixir.finalproject.perfectday.utils.DialogUtils;
+import com.vixir.finalproject.perfectday.adapters.ListTasksCursorAdapter;
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.adapters.TodayTasksCursorAdapter;
+import com.vixir.finalproject.perfectday.utils.Utils;
+import com.vixir.finalproject.perfectday.customdialogs.CalenderDialogFragment;
+import com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment;
 
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 
 public class ListTasksFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, ItemPickerDialogFragment.EditTaskDialogListener {
     private static final String TAG = ListTasksFragment.class.getSimpleName();
@@ -164,7 +164,7 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
                                 }
-                            })
+                            }).canceledOnTouchOutside(false)
                             .positiveText(R.string.agree)
                             .negativeText(R.string.disagree)
                             .show();

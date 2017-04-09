@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,6 +27,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 
 import butterknife.BindView;
 
@@ -142,7 +145,7 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         return temp;
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView mDescriptionTextView;
         View mMainView;
         ToggleButton mButton;

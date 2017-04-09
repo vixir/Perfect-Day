@@ -14,7 +14,7 @@
         android:textAppearance="@style/TextAppearance.Toolbar"
         android:layout_gravity="center_horizontal" />
 
-    <com.vixir.finalproject.perfectday.CalendarView
+    <com.vixir.finalproject.perfectday.customviews.CalendarView
         android:id="@+id/calender_view"
         android:layout_width="match_parent"
         android:layout_height="144dp"

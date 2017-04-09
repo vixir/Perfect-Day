@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.db;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.utils;
 
 import android.content.Context;
 import android.support.v4.app.ActivityCompat;
@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import static com.vixir.finalproject.perfectday.ItemPickerDialogFragment.EDIT_ITEM;
+import com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment;
+
+import static com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment.EDIT_ITEM;
 
 public class DialogUtils {
 

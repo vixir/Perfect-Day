@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.utils;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -13,6 +13,8 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
+import com.vixir.finalproject.perfectday.UpdateDayAlarmReciever;
+import com.vixir.finalproject.perfectday.UpdateProgressFirebaseJobService;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

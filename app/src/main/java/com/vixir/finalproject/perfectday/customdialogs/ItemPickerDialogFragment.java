@@ -1,7 +1,6 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.customdialogs;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,8 +17,8 @@ import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.thebluealliance.spectrum.SpectrumPalette;
+import com.vixir.finalproject.perfectday.R;
 
-import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

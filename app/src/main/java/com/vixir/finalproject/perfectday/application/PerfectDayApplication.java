@@ -1,8 +1,9 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.application;
 
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
+import com.vixir.finalproject.perfectday.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 

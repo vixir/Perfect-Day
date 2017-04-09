@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.fragment;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -17,20 +17,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.vixir.finalproject.perfectday.activities.LoginActivity;
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.R.attr.banner;
-import static android.R.attr.data;
 
 
 public class MoreInfoFragment extends Fragment {

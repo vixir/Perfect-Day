@@ -10,8 +10,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.vixir.finalproject.perfectday.activities.MainActivity;
 
 public class TodayWidgetProvider extends AppWidgetProvider {
     public static final String ACTION_DATA_UPDATE = "android.appwidget.action.APPWIDGET_UPDATE";

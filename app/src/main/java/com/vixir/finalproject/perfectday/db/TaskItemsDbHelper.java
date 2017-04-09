@@ -1,10 +1,11 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.vixir.finalproject.perfectday.TaskItemsContract.TaskItemsColumns;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract.TaskItemsColumns;
 
 public class TaskItemsDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "taskitems.db";

@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 
 
 public class ListTasksCursorAdapter extends RecyclerView.Adapter<ListTasksCursorAdapter.ItemViewHolder> {

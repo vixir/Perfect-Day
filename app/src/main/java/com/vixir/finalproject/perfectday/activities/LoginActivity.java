@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.activities;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -22,6 +22,10 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
+import com.vixir.finalproject.perfectday.activities.MainActivity;
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
+import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
 
 import java.util.Arrays;
 

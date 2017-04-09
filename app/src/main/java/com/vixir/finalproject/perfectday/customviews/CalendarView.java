@@ -1,6 +1,8 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.customviews;
 
 import android.app.ActionBar;
+
+import com.vixir.finalproject.perfectday.R;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

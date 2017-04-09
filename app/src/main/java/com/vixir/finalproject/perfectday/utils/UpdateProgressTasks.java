@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,8 +14,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vixir.finalproject.perfectday.TaskItemsContract;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import com.vixir.finalproject.perfectday.TodayWidgetProvider;
+import com.vixir.finalproject.perfectday.model.TaskItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;

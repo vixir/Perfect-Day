@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.db;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -11,8 +11,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import static com.vixir.finalproject.perfectday.TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY;
-import static com.vixir.finalproject.perfectday.TaskItemsContract.TaskItemsColumns.TABLE_NAME;
+import static com.vixir.finalproject.perfectday.db.TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY;
+import static com.vixir.finalproject.perfectday.db.TaskItemsContract.TaskItemsColumns.TABLE_NAME;
 
 
 public class TaskItemsContentProvider extends ContentProvider {
@@ -59,7 +59,7 @@ public class TaskItemsContentProvider extends ContentProvider {
             }
             case ITEM_TASKS_TODAY: {
                 String isToday = uri.getPathSegments().get(2);
-                String mSelection = TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY + " = ?";
+                String mSelection = COLUMN_NAME_IS_TODAY + " = ?";
                 String[] mSelectionArgs = new String[]{isToday};
                 returnCursor = db.query(TABLE_NAME, projection, mSelection, mSelectionArgs, null, null, null);
                 break;

@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.activities;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -12,6 +12,10 @@ import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.fragment.ListTasksFragment;
+import com.vixir.finalproject.perfectday.fragment.MoreInfoFragment;
+import com.vixir.finalproject.perfectday.fragment.TodayTasksFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

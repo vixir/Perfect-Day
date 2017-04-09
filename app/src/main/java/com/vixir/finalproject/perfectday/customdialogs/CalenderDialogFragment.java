@@ -1,4 +1,4 @@
-package com.vixir.finalproject.perfectday;
+package com.vixir.finalproject.perfectday.customdialogs;
 
 import android.app.ActionBar;
 import android.database.Cursor;
@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
+import com.vixir.finalproject.perfectday.customviews.CalendarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
