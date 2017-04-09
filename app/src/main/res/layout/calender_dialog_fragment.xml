@@ -5,14 +5,19 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/calender_task_title"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:text="" />
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center"
+        android:padding="6dp"
+        android:textAppearance="@style/TextAppearance.Dialog.Calendar"
+        android:layout_gravity="center_horizontal" />
 
     <com.vixir.finalproject.perfectday.CalendarView
         android:id="@+id/calender_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="144dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
 </LinearLayout>

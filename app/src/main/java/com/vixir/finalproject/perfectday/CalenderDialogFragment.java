@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +26,9 @@ public class CalenderDialogFragment extends BottomSheetDialogFragment {
 
     @BindView(R.id.calender_view)
     protected CalendarView mCalendarView;
+
+    @BindView(R.id.calender_task_title)
+    protected TextView mTitleTextView;
 
     private View mView;
     private static int itemId;
@@ -51,7 +55,9 @@ public class CalenderDialogFragment extends BottomSheetDialogFragment {
         uri = uri.buildUpon().appendPath(String.valueOf(itemId)).build();
         Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
         if (cursor.moveToNext()) {
+            int titleIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION);
             int itemDescriptionIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES);
+            int colorIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR);
             String dates = cursor.getString(itemDescriptionIndex);
             try {
                 JSONObject jsonObject = new JSONObject(dates);
@@ -62,6 +68,8 @@ public class CalenderDialogFragment extends BottomSheetDialogFragment {
                         events.add(new Date(jsonArray.getLong(i)));
                     }
                 }
+                mTitleTextView.setText(cursor.getString(titleIndex));
+//                mTitleTextView.setTextColor(cursor.getInt(colorIndex));
                 mCalendarView.updateCalendar(events);
 
             } catch (JSONException e) {

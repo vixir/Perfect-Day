@@ -80,7 +80,7 @@ public class UpdateProgressTasks {
                     jsonObject = new JSONObject(dateList);
                     jsonArray = jsonObject.optJSONArray(UNIQUE_DAYS_KEY);
                     if (null != jsonArray) {
-                        jsonArray.put(System.currentTimeMillis());
+                        jsonArray.put(System.currentTimeMillis() - 2 * 24 * 3600 * 1000);
                     } else {
                         jsonArray = new JSONArray(UNIQUE_DAYS_KEY);
                         jsonArray.put(System.currentTimeMillis());

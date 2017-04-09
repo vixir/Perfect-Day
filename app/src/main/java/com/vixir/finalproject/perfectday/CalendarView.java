@@ -19,6 +19,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.widget.ToggleButton;
 
 
 public class CalendarView extends LinearLayout {
@@ -132,7 +133,7 @@ public class CalendarView extends LinearLayout {
             } else {
                 holder.monthName.setText("");
             }
-            // if this day has an event, specify event image
+            holder.calenderToggle.setChecked(false);
             holder.dayText.setBackgroundResource(0);
             holder.dayText.setText(String.valueOf(date.getDate()));
             if (eventDays != null) {
@@ -141,6 +142,7 @@ public class CalendarView extends LinearLayout {
                             eventDate.getMonth() == month &&
                             eventDate.getYear() == year) {
                         holder.dayText.setTextColor(Color.RED);
+                        holder.calenderToggle.setChecked(true);
                         break;
                     }
                 }
@@ -172,11 +174,13 @@ public class CalendarView extends LinearLayout {
         class ItemViewHolder extends RecyclerView.ViewHolder {
             TextView dayText;
             TextView monthName;
+            ToggleButton calenderToggle;
 
             public ItemViewHolder(View itemView) {
                 super(itemView);
                 dayText = (TextView) itemView.findViewById(R.id.day_text);
                 monthName = (TextView) itemView.findViewById(R.id.month_name);
+                calenderToggle = (ToggleButton) itemView.findViewById(R.id.toggle_calender);
             }
         }
 

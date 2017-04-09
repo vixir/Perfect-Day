@@ -27,4 +27,9 @@
         <item name="android:textSize">@dimen/appbar_title_size</item>
     </style>
 
+    <style name="TextAppearance.Dialog.Calendar" parent="android:TextAppearance" xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item name="fontPath">Comfortaa-Regular.ttf</item>
+        <item name="android:textSize">@dimen/appbar_title_size</item>
+    </style>
+
 </resources>
