@@ -8,13 +8,11 @@
 
     <TextView
         android:id="@+id/item"
-        fontPath="fonts/Roboto-Bold.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingBottom="4dp"
-        android:paddingEnd="24dp"
-        android:paddingStart="24dp"
-        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:textSize="20sp"
+        android:textAppearance="@style/AppTheme.Widget.TextView"
         tools:ignore="MissingPrefix" />
 </LinearLayout>

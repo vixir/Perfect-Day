@@ -27,4 +27,9 @@
         <item name="android:textSize">@dimen/appbar_title_size</item>
     </style>
 
+
+    <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
+        <item name="fontPath">fonts/BreeSerif-Regular.ttf</item>
+    </style>
+
 </resources>

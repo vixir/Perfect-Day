@@ -4,12 +4,14 @@ package com.vixir.finalproject.perfectday;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StrikethroughSpan;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+
 import static android.os.Binder.clearCallingIdentity;
 import static android.os.Binder.restoreCallingIdentity;
 
@@ -20,7 +22,6 @@ public class TodayWidgetService extends RemoteViewsService {
         return new ListViewRemoteViewsFactory(this.getApplicationContext(), intent);
 
     }
-
 
     class ListViewRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -37,11 +38,8 @@ public class TodayWidgetService extends RemoteViewsService {
         public void onCreate() {
 
 
-
         }
 
-        // Given the position (index) of a WidgetItem in the array, use the item's text value in
-        // combination with the app widget item XML file to construct a RemoteViews object.
         public RemoteViews getViewAt(int position) {
 
             RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
@@ -57,11 +55,11 @@ public class TodayWidgetService extends RemoteViewsService {
             int color = mCursor.getInt(backColor);
             int isFinished = mCursor.getInt(isFinishedIndex);
             rv.setTextColor(R.id.item, color);
-            final StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
             if (isFinished == 1) {
-                rv.setTextViewText(R.id.item, description + isFinished);
+                rv.setInt(R.id.item, "setPaintFlags", Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+                rv.setTextViewText(R.id.item, description);
             } else {
-                rv.setTextViewText(R.id.item, description + isFinished);
+                rv.setTextViewText(R.id.item, description);
             }
             Bundle extras = new Bundle();
             extras.putInt(TodayWidgetProvider.EXTRA_ITEM, position);
@@ -82,7 +80,8 @@ public class TodayWidgetService extends RemoteViewsService {
             if (mCursor != null) {
                 mCursor.close();
             }
-            final long identityToken = clearCallingIdentity();;
+            final long identityToken = clearCallingIdentity();
+            ;
             mCursor = mContext.getContentResolver().query(TaskItemsContract.TaskItemsColumns.CONTENT_URI,
                     null,
                     null,
