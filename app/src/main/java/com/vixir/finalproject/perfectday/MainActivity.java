@@ -1,6 +1,7 @@
 package com.vixir.finalproject.perfectday;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,12 +15,18 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
 
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         ActionBar actionBar = getActionBar();
         if (null != actionBar) actionBar.hide();
-        UpdateProgressTasks.updateDateInformation(this);
-        UpdateProgressUtilities.scheduleUpdateProgressReminder(this);
         mBottomBar.setOnTabSelectListener(
                 new OnTabSelectListener() {
                     @Override

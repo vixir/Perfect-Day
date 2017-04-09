@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:background="@color/tw__solid_white"
     android:padding="10dp">
@@ -13,19 +12,28 @@
         android:textOff=""
         android:textOn=""
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/check_complete"
         android:contentDescription="@string/press_toggle_complete"
         />
     <TextView
         android:id="@+id/list_item_description"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:gravity="center_vertical"
         android:paddingBottom="4dp"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        tools:ignore="MissingPrefix"
+        android:layout_weight="8"
         />
+
+    <TextView
+        android:id="@+id/streak"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:layout_gravity="center_vertical"
+        android:text="@string/_0" />
 </LinearLayout>

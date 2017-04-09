@@ -39,4 +39,6 @@
     <string name="disagree">cancel</string>
     <string name="title_archive">Archive</string>
     <string name="archive_content">Pressing okay will move this out of today\'s list.</string>
+    <string name="streak">STREAK</string>
+    <string name="_0">0</string>
 </resources>

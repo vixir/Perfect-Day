@@ -80,13 +80,13 @@ public class UpdateProgressTasks {
                     jsonObject = new JSONObject(dateList);
                     jsonArray = jsonObject.optJSONArray(UNIQUE_DAYS_KEY);
                     if (null != jsonArray) {
-                        jsonArray.put(System.currentTimeMillis() - 2 * 24 * 3600 * 1000);
+                        jsonArray.put(System.currentTimeMillis());
                     } else {
                         jsonArray = new JSONArray(UNIQUE_DAYS_KEY);
                         jsonArray.put(System.currentTimeMillis());
                     }
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES, jsonObject.toString());
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, cursor.getInt(streakIndex) + 1);
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, cursor.getInt(streakIndex));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -98,7 +98,6 @@ public class UpdateProgressTasks {
             uri = uri.buildUpon().appendPath(cursor.getString(idIndex)).build();
             context.getContentResolver().update(uri, contentValues, null, null);
         }
-        System.out.print(TAG + "Update Today");
         Log.e(TAG, "Update Today");
     }
 

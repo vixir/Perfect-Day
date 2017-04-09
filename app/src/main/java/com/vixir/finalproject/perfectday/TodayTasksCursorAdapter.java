@@ -123,8 +123,6 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         public ItemViewHolder(View itemView) {
             super(itemView);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
-            Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "fonts/Montserrat-Regular.ttf");
-            mDescriptionTextView.setTypeface(custom_font);
             mButton = (ToggleButton) itemView.findViewById(R.id.check_complete);
             mMainView = itemView;
         }
