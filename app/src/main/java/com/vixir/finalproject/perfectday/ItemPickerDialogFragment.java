@@ -28,18 +28,6 @@ import butterknife.OnClick;
 public class ItemPickerDialogFragment extends DialogFragment {
 
     private static final String ITEM_COLOR = "item_color";
-    @BindColor(R.color.picker_red)
-    int pickerRed;
-    @BindColor(R.color.picker_amber)
-    int pickerAmber;
-    @BindColor(R.color.picker_teal)
-    int pickerTeal;
-    @BindColor(R.color.picker_blue)
-    int pickerBlue;
-    @BindColor(R.color.picker_orange)
-    int pickerOrange;
-    @BindColor(R.color.picker_yellow)
-    int pickerYellow;
 
     @BindView(R.id.task_description_input)
     MaterialEditText mDescriptionInput;
@@ -79,11 +67,12 @@ public class ItemPickerDialogFragment extends DialogFragment {
         ButterKnife.bind(this, mView);
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Montserrat-Bold.ttf");
         mdialogTitle.setTypeface(custom_font);
-        mSpectrumPalette.setColors(new int[]{pickerAmber, pickerBlue, pickerOrange, pickerRed, pickerTeal, pickerYellow});
+        int[] rainbow = getActivity().getResources().getIntArray(R.array.picker_color);
+        mSpectrumPalette.setColors(rainbow);
         mDescriptionInput.setSelected(true);
-        mSpectrumPalette.setSelectedColor(pickerAmber);
+        mSpectrumPalette.setSelectedColor(rainbow[2]);
         mSpectrumPalette.setHorizontalScrollBarEnabled(true);
-        mSpectrumPalette.setFixedColumnCount(20);
+        mSpectrumPalette.setFixedColumnCount(17);
         if (getTargetRequestCode() == EDIT_ITEM) {
             mdialogTitle.setText(R.string.edit_dialog_title);
         }
@@ -92,7 +81,7 @@ public class ItemPickerDialogFragment extends DialogFragment {
         }
         if (selectedColor == 0) {
             //Math.random() here
-            selectedColor = pickerOrange;
+            selectedColor = rainbow[2];
         }
         mDescriptionInput.setTextColor(selectedColor);
         mSpectrumPalette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener() {

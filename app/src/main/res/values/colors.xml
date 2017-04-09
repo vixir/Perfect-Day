@@ -12,6 +12,7 @@
     <color name="red">#F6402C</color>
     <color name="pink">#EB1460</color>
     <color name="purple">#9C1AB1</color>
+
     <color name="deep_purple">#6633B9</color>
     <color name="indigo">#3D4DB7</color>
     <color name="blue">#1093F5</color>
@@ -29,9 +30,31 @@
     <color name="grey">#9D9D9D</color>
     <color name="blue_grey">#5E7C8B</color>
     <color name="picker_red">#ef9a9a</color>
-    <color name="picker_amber">#ffe082</color>
+    <color name="picker_amber">#FFEC16</color>
     <color name="picker_teal">#80cbc4</color>
     <color name="picker_blue">#bbdefb</color>
     <color name="picker_orange">#ffab91</color>
     <color name="picker_yellow">#fbc02d</color>
+    <color name="picker_purple">#9C1AB1</color>
+    <color name="picker_deep_purple">#6633B9</color>
+    <color name="picker_deep_orange">#FF5505</color>
+    <color name="picker_cyan">#00BBD5</color>
+    <color name="picker_grey">#455a64</color>
+    <color name="picker_deep_red">#c62828</color>
+
+    <array name="picker_color">
+        <item>@color/picker_red</item>
+        <item>@color/picker_amber</item>
+        <item>@color/picker_teal</item>
+        <item>@color/picker_blue</item>
+        <item>@color/picker_orange</item>
+        <item>@color/yellow</item>
+        <item>@color/picker_purple</item>
+        <item>@color/picker_grey</item>
+        <item>@color/picker_deep_orange</item>
+        <item>@color/blue</item>
+        <item>@color/picker_cyan</item>
+        <item>@color/picker_deep_purple</item>
+        <item>@color/picker_deep_red</item>
+    </array>
 </resources>
