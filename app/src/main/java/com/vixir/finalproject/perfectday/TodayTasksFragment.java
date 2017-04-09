@@ -164,7 +164,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
                                 }
-                            })
+                            }).canceledOnTouchOutside(false)
                             .positiveText(R.string.agree)
                             .negativeText(R.string.disagree)
                             .show();
