@@ -33,4 +33,10 @@
     <string name="invalid_task">Please enter valid input</string>
     <string name="empty_task">Empty task don\'t get stuff done.</string>
     <string name="_00">00</string>
+    <string name="title">Confirm Delete</string>
+    <string name="content">Press okay to delete task.</string>
+    <string name="agree">Okay</string>
+    <string name="disagree">cancel</string>
+    <string name="title_archive">Archive</string>
+    <string name="archive_content">Pressing okay will move this out of today\'s list.</string>
 </resources>

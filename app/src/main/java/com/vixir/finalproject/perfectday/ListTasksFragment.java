@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
 import butterknife.BindColor;
@@ -140,14 +143,32 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT) {
-                    int id = (int) viewHolder.itemView.getTag();
-                    String stringId = Integer.toString(id);
-                    Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
-                    uri = uri.buildUpon().appendPath(stringId).build();
-                    getActivity().getContentResolver().delete(uri, null, null);
-                    getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, ListTasksFragment.this);
+                    new MaterialDialog.Builder(getActivity())
+                            .title(R.string.title)
+                            .content(R.string.content)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    int id = (int) viewHolder.itemView.getTag();
+                                    String stringId = Integer.toString(id);
+                                    Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
+                                    uri = uri.buildUpon().appendPath(stringId).build();
+                                    getActivity().getContentResolver().delete(uri, null, null);
+                                    getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, ListTasksFragment.this);
+                                }
+                            })
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                }
+                            })
+                            .positiveText(R.string.agree)
+                            .negativeText(R.string.disagree)
+                            .show();
+
                 } else {
                     int id = (int) viewHolder.itemView.getTag();
                     String stringId = Integer.toString(id);

@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +29,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.BindColor;
 import butterknife.BindView;
@@ -136,17 +140,35 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
                 //run in background thread
                 if (direction == ItemTouchHelper.LEFT) {
-                    int id = (int) viewHolder.itemView.getTag();
-                    Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, 0);
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 0);
-                    uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
-                    getActivity().getContentResolver().update(uri, contentValues, null, null);
-                    getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, TodayTasksFragment.this);
+                    new MaterialDialog.Builder(getActivity())
+                            .title(R.string.title_archive)
+                            .content(R.string.archive_content)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    int id = (int) viewHolder.itemView.getTag();
+                                    Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
+                                    ContentValues contentValues = new ContentValues();
+                                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, 0);
+                                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 0);
+                                    uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
+                                    getActivity().getContentResolver().update(uri, contentValues, null, null);
+                                    getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, TodayTasksFragment.this);
+                                }
+                            })
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                }
+                            })
+                            .positiveText(R.string.agree)
+                            .negativeText(R.string.disagree)
+                            .show();
+
                 } else {
                     int id = (int) viewHolder.itemView.getTag();
                     String stringId = Integer.toString(id);
