@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ListTasksFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListTasksFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, ItemPickerDialogFragment.EditTaskDialogListener {
     private static final String TAG = ListTasksFragment.class.getSimpleName();
     private static final int TASK_LOADER_ID = 0;
     private View mView;
@@ -148,6 +148,19 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
                     uri = uri.buildUpon().appendPath(stringId).build();
                     getActivity().getContentResolver().delete(uri, null, null);
                     getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, ListTasksFragment.this);
+                } else {
+                    int id = (int) viewHolder.itemView.getTag();
+                    String stringId = Integer.toString(id);
+                    Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
+                    uri = uri.buildUpon().appendPath(stringId).build();
+                    Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+
+                    if (cursor.moveToNext()) {
+                        int itemDescriptionIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION);
+                        int backColor = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR);
+                        DialogUtils.callEditDialog(getActivity(), ListTasksFragment.this, id, cursor.getString(itemDescriptionIndex), cursor.getInt(backColor));
+                        mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                    }
                 }
             }
 
@@ -175,6 +188,13 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
                         c.drawRect(background, p);
                         icon = drawableToBitmap(getResources().getDrawable(R.drawable.ic_rubbish_bin));
                         RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                        c.drawBitmap(icon, null, icon_dest, p);
+                    } else {
+                        p.setColor(veryLightGray);
+                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX, (float) itemView.getBottom());
+                        c.drawRect(background, p);
+                        icon = drawableToBitmap(getResources().getDrawable(R.drawable.ic_edit));
+                        RectF icon_dest = new RectF((float) itemView.getLeft() + width, (float) itemView.getTop() + width, (float) itemView.getLeft() + 2 * width, (float) itemView.getBottom() - width);
                         c.drawBitmap(icon, null, icon_dest, p);
                     }
                 }
@@ -205,5 +225,16 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bitmap;
+    }
+
+    @Override
+    public void onFinishedCreateDialog(String inputText, int color) {
+
+    }
+
+    @Override
+    public void onFinishedEditDialog(int id, String inputText, int color) {
+        Utils.editItem(getActivity(), id, inputText, color);
+        getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
     }
 }
