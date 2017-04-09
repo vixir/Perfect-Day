@@ -5,4 +5,4 @@
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen"
-    android:previewImage="@mipmap/widget_screen_shot" />
+    android:previewImage="@drawable/widget_screen_shot" />
