@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <TextView
@@ -10,13 +11,13 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="@style/TextAppearance.Toolbar"
-        android:textColor="@color/deep_orange" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/day_text"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:background="@drawable/ic_restart"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:text="@string/_00"
         android:textAlignment="center"
@@ -28,7 +29,7 @@
         android:layout_height="@dimen/toggle_button_height"
         android:layout_gravity="center_vertical"
         android:background="@drawable/check_complete_calendar"
-        android:backgroundTint="@color/deep_orange"
+        android:backgroundTint="@color/white"
         android:contextClickable="false"
         android:clickable="false"
         android:textOff=""

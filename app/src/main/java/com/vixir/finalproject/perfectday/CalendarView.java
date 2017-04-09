@@ -1,5 +1,6 @@
 package com.vixir.finalproject.perfectday;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -141,18 +142,19 @@ public class CalendarView extends LinearLayout {
                     if (eventDate.getDate() == day &&
                             eventDate.getMonth() == month &&
                             eventDate.getYear() == year) {
-                        holder.dayText.setTextColor(Color.RED);
+                        holder.dayText.setTextColor(Color.WHITE);
+                        holder.dayText.setTypeface(null, Typeface.BOLD);
                         holder.calenderToggle.setChecked(true);
                         break;
                     }
                 }
             }
-            if (month != today.getMonth() || year != today.getYear()) {
-                holder.dayText.setTextColor(Color.GRAY);
-            } else if (day == today.getDate()) {
-                holder.dayText.setTypeface(null, Typeface.BOLD);
-                holder.dayText.setTextColor(Color.BLUE);
-            }
+//            if (month != today.getMonth() || year != today.getYear()) {
+            holder.dayText.setTextColor(Color.WHITE);
+            /*} else if (day == today.getDate()) {
+              holder.dayText.setTypeface(null, Typeface.BOLD);
+              }
+            */
 
             // set text
         }

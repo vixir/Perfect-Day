@@ -1,5 +1,6 @@
 package com.vixir.finalproject.perfectday;
 
+import android.app.ActionBar;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -69,8 +70,9 @@ public class CalenderDialogFragment extends BottomSheetDialogFragment {
                     }
                 }
                 mTitleTextView.setText(cursor.getString(titleIndex));
-//                mTitleTextView.setTextColor(cursor.getInt(colorIndex));
+                mTitleTextView.setTextColor(cursor.getInt(colorIndex));
                 mCalendarView.updateCalendar(events);
+                mCalendarView.setBackgroundColor(cursor.getInt(colorIndex));
 
             } catch (JSONException e) {
                 e.printStackTrace();
