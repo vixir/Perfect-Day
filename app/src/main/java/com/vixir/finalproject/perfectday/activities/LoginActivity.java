@@ -81,10 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent updateProgressIntent = new Intent(this, UpdateProgressIntentService.class);
                 updateProgressIntent.setAction(UpdateProgressTasks.ACTION_FETCH_FIREBASE_DB);
                 this.startService(updateProgressIntent);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
+//                finish();
                 return;
             } else {
                 // Sign in failed

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,8 +15,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vixir.finalproject.perfectday.activities.LoginActivity;
+import com.vixir.finalproject.perfectday.activities.MainActivity;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import com.vixir.finalproject.perfectday.TodayWidgetProvider;
+import com.vixir.finalproject.perfectday.fragment.TodayTasksFragment;
 import com.vixir.finalproject.perfectday.model.TaskItem;
 
 import org.json.JSONArray;
@@ -48,7 +52,7 @@ public class UpdateProgressTasks {
         }
     }
 
-    public static void updateDateInformation(Context context) {
+    private static void updateDateInformation(Context context) {
         Cursor cursor;
         try {
             Uri todaysUri = TaskItemsContract.TaskItemsColumns.CONTENT_URI.buildUpon().appendPath(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY).appendPath("1").build();
@@ -151,7 +155,7 @@ public class UpdateProgressTasks {
 
     }
 
-    public static void fetchDataFromFirebase(final Context context) {
+    private static void fetchDataFromFirebase(final Context context) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -159,7 +163,7 @@ public class UpdateProgressTasks {
         child.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ContentValues[] contentValuesArray = new ContentValues[(int) dataSnapshot.getChildrenCount()]; //tears of joy when this fails
+                ContentValues[] contentValuesArray = new ContentValues[(int) dataSnapshot.getChildrenCount()];
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 int i = 0;
                 for (DataSnapshot child : children) {
@@ -174,10 +178,11 @@ public class UpdateProgressTasks {
                     contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES, value.getListDates());
                     contentValuesArray[i++] = contentValues;
                 }
-                int uri = context.getContentResolver().bulkInsert(TaskItemsContract.TaskItemsColumns.CONTENT_URI, contentValuesArray);
-                if (uri != 0) {
-                    // loader refresh
-                }
+                context.getContentResolver().bulkInsert(TaskItemsContract.TaskItemsColumns.CONTENT_URI, contentValuesArray);
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                UpdateProgressUtilities.scheduleUpdateProgressReminder(context);
             }
 
             @Override
@@ -191,5 +196,6 @@ public class UpdateProgressTasks {
         Intent intent = new Intent();
         intent.setAction(TodayWidgetProvider.ACTION_DATA_UPDATE);
         context.sendBroadcast(intent);
+        Log.e(TAG, "alarm");
     }
 }

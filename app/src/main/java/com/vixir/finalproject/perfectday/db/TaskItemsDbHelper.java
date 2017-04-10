@@ -8,7 +8,7 @@ import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract.TaskItemsColumns;
 
 public class TaskItemsDbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "taskitems.db";
+    public static final String DATABASE_NAME = "taskitems.db";
 
     private static final int DATABASE_VERSION = 1;
 

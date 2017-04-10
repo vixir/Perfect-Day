@@ -16,6 +16,7 @@ import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.fragment.ListTasksFragment;
 import com.vixir.finalproject.perfectday.fragment.MoreInfoFragment;
 import com.vixir.finalproject.perfectday.fragment.TodayTasksFragment;
+import com.vixir.finalproject.perfectday.utils.UpdateProgressUtilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

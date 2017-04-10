@@ -122,6 +122,10 @@ public class TaskItemsContentProvider extends ContentProvider {
                 String[] mSelectionArgs = new String[]{id};
                 returnIdx = db.delete(TABLE_NAME, mSelection, mSelectionArgs);
                 break;
+            case ITEM_TASKS:
+                removeAll();
+                returnIdx = 0;
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown Uri" + uri);
         }
@@ -174,5 +178,10 @@ public class TaskItemsContentProvider extends ContentProvider {
             default:
                 return super.bulkInsert(uri, values);
         }
+    }
+
+    public void removeAll() {
+        SQLiteDatabase db = mTaskItemsDbHelper.getWritableDatabase();
+        db.delete(TaskItemsContract.TaskItemsColumns.TABLE_NAME, null, null);
     }
 }

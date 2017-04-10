@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.vixir.finalproject.perfectday.activities.MainActivity;
@@ -64,6 +65,7 @@ public class TodayWidgetProvider extends AppWidgetProvider {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
                     new ComponentName(context, getClass()));
+            Log.e("alarm", "alarm");
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.list_view);
         }
     }

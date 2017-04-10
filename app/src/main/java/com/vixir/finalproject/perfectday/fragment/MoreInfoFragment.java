@@ -15,6 +15,8 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -24,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.vixir.finalproject.perfectday.activities.LoginActivity;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.db.TaskItemsDbHelper;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -119,10 +122,13 @@ public class MoreInfoFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         startActivity(new Intent(getContext(), LoginActivity.class));
+                        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(getContext()));
+                        dispatcher.cancelAll();
+                        Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
+                        getActivity().getContentResolver().delete(uri, null, null);
                         getActivity().finish();
                     }
                 });
-        getActivity().deleteDatabase(TaskItemsContract.TaskItemsColumns.TABLE_NAME);
     }
 
 }
