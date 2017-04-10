@@ -4,7 +4,7 @@
     <string name="app_login_reason">Google account is used to sync your created progress in the cloud so that you don\'t have to worry about losing progress.</string>
     <string name="sign_in_cancelled">sign in cancelled</string>
     <string name="no_internet_connection">no internet connection</string>
-    <string name="unknown_error">unknown error</string>
+    <string name="unknown_error">Calma Calma !!</string>
     <string name="sign_in_successful">signed in</string>
     <string name="unknown_sign_in_response">unknown response</string>
     <string name="today">Today</string>

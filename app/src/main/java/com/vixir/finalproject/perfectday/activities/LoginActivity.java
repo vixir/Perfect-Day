@@ -32,6 +32,7 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             showWhiteSnackBar(R.string.sign_in_successful);
+            googleLoginButton.setVisibility(View.INVISIBLE);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -77,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == ResultCodes.OK) {
+                googleLoginButton.setVisibility(View.INVISIBLE);
                 showWhiteSnackBar(R.string.sign_in_successful);
                 Intent updateProgressIntent = new Intent(this, UpdateProgressIntentService.class);
                 updateProgressIntent.setAction(UpdateProgressTasks.ACTION_FETCH_FIREBASE_DB);

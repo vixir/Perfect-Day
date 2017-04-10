@@ -20,7 +20,11 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
     }
 }
-
+repositories {
+    maven {
+        url 'http://dl.bintray.com/glomadrian/maven'
+    }
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

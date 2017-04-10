@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class UpdateProgressUtilities {
 
-    private static final int UPDATE_INTERVAL_MINUTES = 1;
+    private static final int UPDATE_INTERVAL_MINUTES = 30;
     private static final int UPDATE_INTERVAL_SECONDS = (int) (TimeUnit.MINUTES.toSeconds(UPDATE_INTERVAL_MINUTES));
     private static final int SYNC_FLEXTIME_SECONDS = UPDATE_INTERVAL_SECONDS;
 
@@ -36,13 +36,14 @@ public class UpdateProgressUtilities {
         }
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.HOUR_OF_DAY, 59);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
-        calendar.getActualMaximum(Calendar.HOUR_OF_DAY);
+        calendar.add(Calendar.MINUTE, 3);
+        //could have done add(Calender.Date,1). I have trust issues
         Intent intentAlarm = new Intent(context, UpdateDayAlarmReciever.class);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 15 * 60 * 60 * 1000, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(context, 1, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT));
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(context, 1, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT));
 
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
@@ -56,6 +57,7 @@ public class UpdateProgressUtilities {
                         0,
                         UPDATE_INTERVAL_SECONDS))
                 .setReplaceCurrent(true)
+                .setConstraints(Constraint.ON_ANY_NETWORK)
                 .build();
         /* Schedule the Job with the dispatcher */
         dispatcher.schedule(constraintReminderJob);
