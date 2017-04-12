@@ -68,13 +68,12 @@ public class ItemPickerDialogFragment extends DialogFragment {
         mdialogTitle.setTypeface(custom_font);
         int[] rainbow = getActivity().getResources().getIntArray(R.array.picker_color);
         mSpectrumPalette.setColors(rainbow);
-        mdialogTitle.setHintTextColor(rainbow[2]);
         mSpectrumPalette.setHorizontalScrollBarEnabled(true);
         mSpectrumPalette.setFixedColumnCount(17);
         mDescriptionInput.setSelected(true);
         if (getTargetRequestCode() == EDIT_ITEM) {
             mdialogTitle.setText(R.string.edit_dialog_title);
-            mSpectrumPalette.setSelectedColor(selectedColor);
+            mdialogTitle.setHintTextColor(selectedColor);
         }
         if (!task.equals("")) {
             mDescriptionInput.setText(task);
@@ -84,6 +83,7 @@ public class ItemPickerDialogFragment extends DialogFragment {
             selectedColor = rainbow[2];
             mdialogTitle.setHintTextColor(rainbow[2]);
         }
+        mSpectrumPalette.setSelectedColor(selectedColor);
         mDescriptionInput.setTextColor(selectedColor);
         mSpectrumPalette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener() {
             @Override

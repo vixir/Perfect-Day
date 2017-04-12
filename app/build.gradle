@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'capstone'
             keyPassword 'password'
-            storeFile file('C:/Users/DELL/Documents/PerfectDay/key.jks')
+            storeFile file('key.jks')
             storePassword 'password'
         }
     }

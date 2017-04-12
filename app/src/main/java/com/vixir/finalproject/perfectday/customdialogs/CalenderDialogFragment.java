@@ -64,11 +64,15 @@ public class CalenderDialogFragment extends BottomSheetDialogFragment {
             int titleIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION);
             int itemDescriptionIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES);
             int colorIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR);
+            int finishedIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED);
             String dates = cursor.getString(itemDescriptionIndex);
             try {
                 JSONObject jsonObject = new JSONObject(dates);
                 JSONArray jsonArray = jsonObject.optJSONArray(UpdateProgressTasks.UNIQUE_DAYS_KEY);
                 HashSet<Date> events = new HashSet<Date>();
+                if (1 == cursor.getInt(finishedIndex)) {
+                    events.add(new Date());
+                }
                 if (null != jsonArray) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         events.add(new Date(jsonArray.getLong(i)));
