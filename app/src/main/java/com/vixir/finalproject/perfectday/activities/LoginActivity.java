@@ -3,17 +3,16 @@ package com.vixir.finalproject.perfectday.activities;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +21,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
-import com.github.glomadrian.roadrunner.IndeterminateRoadRunner;
 import com.google.firebase.auth.FirebaseAuth;
-import com.vixir.finalproject.perfectday.activities.MainActivity;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
 import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
@@ -43,8 +40,9 @@ public class LoginActivity extends AppCompatActivity {
     Button googleLoginButton;
     @BindView(R.id.linear_lay)
     LinearLayout linearLayout;
-    @BindView(R.id.material)
-    IndeterminateRoadRunner roadRunner;
+    @BindView(R.id.splash_background)
+    ImageView splashBackground;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +63,15 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        FragmentManager fm = getSupportFragmentManager();
+        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (getFragmentManager().getBackStackEntryCount() == 0) finish();
+            }
+        });
     }
+
 
     @OnClick(R.id.google_button)
     protected void onClick() {

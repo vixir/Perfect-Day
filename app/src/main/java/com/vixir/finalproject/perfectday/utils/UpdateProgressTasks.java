@@ -184,8 +184,6 @@ public class UpdateProgressTasks {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-                ((Activity) context).finish();
-                UpdateProgressUtilities.scheduleUpdateProgressReminder(context);
             }
 
             @Override
@@ -193,6 +191,7 @@ public class UpdateProgressTasks {
 
             }
         });
+        UpdateProgressUtilities.scheduleUpdateProgressReminder(context);
     }
 
     private static void sendCursorDataToWidgetProvider(Context context) {

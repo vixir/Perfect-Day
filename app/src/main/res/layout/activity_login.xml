@@ -6,17 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.glomadrian.roadrunner.IndeterminateRoadRunner
-        android:id="@+id/material"
+    <ImageView
+        android:id="@+id/splash_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        lib:movement_direction="counter_clockwise"
-        lib:path_animation_type="material"
-        lib:path_color="@color/deep_orange"
-        lib:path_data="@string/cloud_vector_path"
-        lib:path_original_height="480"
-        lib:path_original_width="640"
-        lib:stroke_width="3sp" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/august_illustration" />
 
     <LinearLayout
         android:id="@+id/linear_lay"
