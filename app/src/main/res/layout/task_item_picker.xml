@@ -26,7 +26,6 @@
         android:gravity="center"
         android:hint="@string/app_name"
         android:padding="@dimen/add_edit_text_padding"
-        android:textCursorDrawable="@null"
         app:met_errorColor="@color/picker_red"
         app:met_maxCharacters="25"
         app:met_minCharacters="2"

@@ -70,6 +70,7 @@ public class ItemPickerDialogFragment extends DialogFragment {
         mSpectrumPalette.setColors(rainbow);
         mDescriptionInput.setSelected(true);
         mSpectrumPalette.setSelectedColor(rainbow[2]);
+        mdialogTitle.setHintTextColor(rainbow[2]);
         mSpectrumPalette.setHorizontalScrollBarEnabled(true);
         mSpectrumPalette.setFixedColumnCount(17);
         if (getTargetRequestCode() == EDIT_ITEM) {
@@ -81,6 +82,7 @@ public class ItemPickerDialogFragment extends DialogFragment {
         if (selectedColor == 0) {
             //Math.random() here
             selectedColor = rainbow[2];
+            mdialogTitle.setHintTextColor(rainbow[2]);
         }
         mDescriptionInput.setTextColor(selectedColor);
         mSpectrumPalette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener() {
@@ -88,6 +90,7 @@ public class ItemPickerDialogFragment extends DialogFragment {
             public void onColorSelected(@ColorInt int color) {
                 selectedColor = color;
                 mDescriptionInput.setTextColor(color);
+                mdialogTitle.setHintTextColor(color);
             }
         });
         return mView;
