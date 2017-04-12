@@ -1,11 +1,13 @@
 package com.vixir.finalproject.perfectday.utils;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -182,6 +184,7 @@ public class UpdateProgressTasks {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                ((Activity) context).finish();
                 UpdateProgressUtilities.scheduleUpdateProgressReminder(context);
             }
 
