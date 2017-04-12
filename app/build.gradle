@@ -4,9 +4,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'capstone'
-            keyPassword 'vixir'
-            storeFile file("keystore.jks")
-            storePassword 'vixir'
+            keyPassword 'password'
+            storeFile file('C:/Users/DELL/Documents/PerfectDay/key.jks')
+            storePassword 'password'
         }
     }
     compileSdkVersion 25
@@ -20,13 +20,17 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
             signingConfig signingConfigs.config
             multiDexEnabled true
         }
+    }
+    productFlavors {
     }
 }
 
@@ -53,11 +57,12 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.2'
     compile 'com.google.firebase:firebase-database:10.2.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:customtabs:25.2.0'
     compile 'com.google.firebase:firebase-ads:10.2.0'
     compile 'com.firebase:firebase-jobdispatcher:0.6.0'
+    compile 'com.github.glomadrian:roadrunner:1.0@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'

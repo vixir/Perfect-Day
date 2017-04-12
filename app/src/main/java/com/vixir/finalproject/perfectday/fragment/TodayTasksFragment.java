@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -53,6 +54,9 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
 
     @BindColor(R.color.very_light_gray)
     int veryLightGray;
+
+    @BindView(R.id.streak_title)
+    TextView streakTitle;
 
     @Nullable
     @Override
@@ -122,6 +126,11 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (null != data && data.getCount() > 0) {
+            streakTitle.setVisibility(View.VISIBLE);
+        } else {
+            streakTitle.setVisibility(View.INVISIBLE);
+        }
         mTasksCursorAdapter.swapCursor(data);
     }
 

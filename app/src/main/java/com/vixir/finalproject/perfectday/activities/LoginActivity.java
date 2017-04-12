@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
+import com.github.glomadrian.roadrunner.IndeterminateRoadRunner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.vixir.finalproject.perfectday.activities.MainActivity;
 import com.vixir.finalproject.perfectday.R;
@@ -32,7 +34,6 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,6 +41,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 274;
     @BindView(R.id.google_button)
     Button googleLoginButton;
+    @BindView(R.id.linear_lay)
+    LinearLayout linearLayout;
+    @BindView(R.id.material)
+    IndeterminateRoadRunner roadRunner;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == ResultCodes.OK) {
                 googleLoginButton.setVisibility(View.INVISIBLE);
                 showWhiteSnackBar(R.string.sign_in_successful);
+                linearLayout.setVisibility(View.GONE);
                 Intent updateProgressIntent = new Intent(this, UpdateProgressIntentService.class);
                 updateProgressIntent.setAction(UpdateProgressTasks.ACTION_FETCH_FIREBASE_DB);
                 this.startService(updateProgressIntent);

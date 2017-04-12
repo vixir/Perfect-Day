@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ToggleButton;
 
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.utils.Utils;
 
 
 public class ListTasksCursorAdapter extends RecyclerView.Adapter<ListTasksCursorAdapter.ItemViewHolder> {
@@ -103,7 +105,7 @@ public class ListTasksCursorAdapter extends RecyclerView.Adapter<ListTasksCursor
                 Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
                 mContext.getContentResolver().update(uri, contentValues, null, null);
-                new Toast(mContext).makeText(mContext, "Moved to Today's Task List", Toast.LENGTH_SHORT).show();
+                Utils.showWhiteSnackBar(R.string.moved_today_message, (AppCompatActivity) mContext);
             }
         });
 

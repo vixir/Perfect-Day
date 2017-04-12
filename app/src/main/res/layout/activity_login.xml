@@ -6,11 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.github.glomadrian.roadrunner.IndeterminateRoadRunner
+        android:id="@+id/material"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        lib:movement_direction="counter_clockwise"
+        lib:path_animation_type="material"
+        lib:path_color="@color/deep_orange"
+        lib:path_data="@string/cloud_vector_path"
+        lib:path_original_height="480"
+        lib:path_original_width="640"
+        lib:stroke_width="3sp" />
 
+    <LinearLayout
+        android:id="@+id/linear_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
