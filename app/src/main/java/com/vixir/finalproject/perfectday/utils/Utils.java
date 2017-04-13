@@ -2,6 +2,7 @@ package com.vixir.finalproject.perfectday.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -93,5 +95,12 @@ public class Utils {
         editor.apply();
     }
 
+    public static void updateWidget(Context context) {
+        if (null != context) {
+            Intent updateProgressIntent = new Intent(context, UpdateProgressIntentService.class);
+            updateProgressIntent.setAction(UpdateProgressTasks.ACTION_SEND_DATA_TO_WIDGET);
+            context.startService(updateProgressIntent);
+        }
+    }
 
 }

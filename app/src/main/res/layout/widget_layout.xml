@@ -30,8 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="4dp"
-        android:text="No Tasks Created Yet" />
+        android:layout_margin="@dimen/widget_tv_margin"
+        android:text="@string/no_tasks_created_yet" />
 
 </LinearLayout>
 

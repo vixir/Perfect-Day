@@ -30,6 +30,7 @@ import android.widget.ToggleButton;
 
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.utils.Utils;
 
 import butterknife.BindView;
 
@@ -88,7 +89,6 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
             drawable = drawable.mutate();
             DrawableCompat.setTint(drawable, color);
             DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP);
-
         }
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +107,7 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
                             contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, finalStreak);
                             contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, 0);
                         }
+                        Utils.updateWidget(mContext);
                         Uri uri = TaskItemsContract.TaskItemsColumns.CONTENT_URI;
                         uri = uri.buildUpon().appendPath(String.valueOf(id)).build();
                         mContext.getContentResolver().update(uri, contentValues, null, null);

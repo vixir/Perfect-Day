@@ -59,6 +59,7 @@ public class TodayWidgetService extends RemoteViewsService {
                 rv.setInt(R.id.item, "setPaintFlags", Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
                 rv.setTextViewText(R.id.item, description);
             } else {
+                rv.setInt(R.id.item, "setPaintFlags", Paint.ANTI_ALIAS_FLAG);
                 rv.setTextViewText(R.id.item, description);
             }
             Bundle extras = new Bundle();

@@ -1,6 +1,7 @@
 package com.vixir.finalproject.perfectday.fragment;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -29,10 +30,12 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
 import com.vixir.finalproject.perfectday.utils.DialogUtils;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import com.vixir.finalproject.perfectday.adapters.TodayTasksCursorAdapter;
+import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
 import com.vixir.finalproject.perfectday.utils.Utils;
 import com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment;
 
@@ -269,7 +272,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
     public void onFinishedCreateDialog(String inputText, int color) {
         Utils.addItem(getActivity(), inputText, color);
         getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
-
+        Utils.updateWidget(getActivity());
     }
 
     @Override

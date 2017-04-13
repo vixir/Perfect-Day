@@ -47,4 +47,5 @@
     <string name="hint_create_item">Click on + symbol to create a new \n Perfect Day Task</string>
     <string name="hint_edit_task">Swipe Right to edit a task and Left to move out of today\'s list.</string>
     <string name="hint_list_task">Swipe left to delete and click on the item to view activity for the previous month.</string>
+    <string name="no_tasks_created_yet">widget_no_task_message</string>
 </resources>
