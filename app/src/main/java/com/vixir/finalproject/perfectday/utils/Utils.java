@@ -76,12 +76,18 @@ public class Utils {
     }
 
     public static boolean isFirstTimeLogin(Context context) {
+        if (null == context) {
+            return false;
+        }
         SharedPreferences prefs = context.getSharedPreferences(FIRST_TIME_LOGIN, MODE_PRIVATE);
         Boolean isFirstTime = prefs.getBoolean(Constants.IS_FIRST_TIME, false);
         return isFirstTime;
     }
 
     public static void changeFirstTimeLogin(Context context) {
+        if (null == context) {
+            return;
+        }
         SharedPreferences.Editor editor = context.getSharedPreferences(FIRST_TIME_LOGIN, MODE_PRIVATE).edit();
         editor.putBoolean(Constants.IS_FIRST_TIME, false);
         editor.apply();
