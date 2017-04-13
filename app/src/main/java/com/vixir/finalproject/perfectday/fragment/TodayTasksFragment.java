@@ -270,15 +270,19 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public void onFinishedCreateDialog(String inputText, int color) {
-        Utils.addItem(getActivity(), inputText, color);
-        getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
-        Utils.updateWidget(getActivity());
+        if (null != getActivity()) {
+            Utils.addItem(getActivity(), inputText, color);
+            getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+            Utils.updateWidget(getActivity());
+        }
     }
 
     @Override
     public void onFinishedEditDialog(int id, String inputText, int color) {
-        Utils.editItem(getActivity(), id, inputText, color);
-        getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+        if (null != getActivity()) {
+            Utils.editItem(getActivity(), id, inputText, color);
+            getActivity().getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+        }
     }
 
 

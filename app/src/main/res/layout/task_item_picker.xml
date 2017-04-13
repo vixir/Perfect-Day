@@ -33,15 +33,13 @@
 
     <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollIndicators="bottom">
 
         <com.thebluealliance.spectrum.SpectrumPalette
             android:id="@+id/color_picker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </com.thebluealliance.spectrum.SpectrumPalette>
+            android:layout_height="wrap_content" />
     </HorizontalScrollView>
 
     <Button
