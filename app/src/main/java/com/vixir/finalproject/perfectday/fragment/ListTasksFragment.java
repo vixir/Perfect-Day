@@ -21,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ import com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.toptas.fancyshowcase.FancyShowCaseView;
 
 public class ListTasksFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, ItemPickerDialogFragment.EditTaskDialogListener {
     private static final String TAG = ListTasksFragment.class.getSimpleName();
@@ -46,6 +48,8 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
     private View mView;
     private Paint p = new Paint();
     private int selectedColor = Color.WHITE;
+    @BindColor(R.color.transparent_red)
+    protected int mHintColor;
 
     private ListTasksCursorAdapter mTasksCursorAdapter;
 
@@ -126,6 +130,18 @@ public class ListTasksFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (null != data && data.getCount() > 0) {
+            if (null != getActivity() && Utils.isFirstTimeLogin(getContext())) {
+                new FancyShowCaseView.Builder(getActivity())
+                        .focusOn(mListTaskRecycler)
+                        .backgroundColor(mHintColor)
+                        .title(getString(R.string.hint_list_task))
+                        .titleStyle(0, Gravity.CENTER)
+                        .build()
+                        .show();
+                Utils.changeFirstTimeLogin(getActivity());
+            }
+        }
         mTasksCursorAdapter.swapCursor(data);
     }
 

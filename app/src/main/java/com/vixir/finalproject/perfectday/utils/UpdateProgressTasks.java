@@ -1,13 +1,10 @@
 package com.vixir.finalproject.perfectday.utils;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,18 +14,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vixir.finalproject.perfectday.activities.LoginActivity;
 import com.vixir.finalproject.perfectday.activities.MainActivity;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import com.vixir.finalproject.perfectday.TodayWidgetProvider;
-import com.vixir.finalproject.perfectday.fragment.TodayTasksFragment;
 import com.vixir.finalproject.perfectday.model.TaskItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

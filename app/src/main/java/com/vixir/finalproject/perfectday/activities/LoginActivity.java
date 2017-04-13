@@ -3,6 +3,7 @@ package com.vixir.finalproject.perfectday.activities;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +25,7 @@ import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
+import com.vixir.finalproject.perfectday.utils.Constants;
 import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
 
 import java.util.Arrays;
@@ -32,6 +34,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static com.vixir.finalproject.perfectday.utils.Constants.FIRST_TIME_LOGIN;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -90,18 +94,18 @@ public class LoginActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == ResultCodes.OK) {
+                SharedPreferences.Editor editor = getSharedPreferences(FIRST_TIME_LOGIN, MODE_PRIVATE).edit();
+                editor.putBoolean(Constants.IS_FIRST_TIME, true);
+                editor.apply();
                 googleLoginButton.setVisibility(View.INVISIBLE);
                 showWhiteSnackBar(R.string.sign_in_successful);
                 linearLayout.setVisibility(View.GONE);
                 Intent updateProgressIntent = new Intent(this, UpdateProgressIntentService.class);
                 updateProgressIntent.setAction(UpdateProgressTasks.ACTION_FETCH_FIREBASE_DB);
                 this.startService(updateProgressIntent);
-//                finish();
                 return;
             } else {
-                // Sign in failed
                 if (response == null) {
-                    // User pressed back button
                     showWhiteSnackBar(R.string.sign_in_cancelled);
                     return;
                 }

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.net.Uri;
@@ -19,9 +20,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -37,6 +40,7 @@ import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.toptas.fancyshowcase.FancyShowCaseView;
 
 import static com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment.NEW_ITEM;
 
@@ -51,6 +55,13 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
 
     @BindView(R.id.taskitems_recycler)
     RecyclerView mTodayTaskRecycler;
+
+    @BindView((R.id.add_item_button))
+    protected ImageView mAddButton;
+
+
+    @BindColor(R.color.transparent_red)
+    protected int mHintColor;
 
     @BindColor(R.color.very_light_gray)
     int veryLightGray;
@@ -128,8 +139,28 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (null != data && data.getCount() > 0) {
             streakTitle.setVisibility(View.VISIBLE);
+            if (null != getActivity() && Utils.isFirstTimeLogin(getActivity())) {
+                new FancyShowCaseView.Builder(getActivity())
+                        .focusOn(streakTitle)
+                        .backgroundColor(mHintColor)
+                        .title(getString(R.string.hint_edit_task))
+                        .titleStyle(0, Gravity.CENTER)
+                        .build()
+                        .show();
+            }
         } else {
             streakTitle.setVisibility(View.INVISIBLE);
+        }
+        if (null != getActivity() && Utils.isFirstTimeLogin(getActivity())) {
+            new FancyShowCaseView.Builder(getActivity())
+                    .focusOn(mAddButton)
+                    .roundRectRadius(20)
+                    .focusCircleRadiusFactor(2.5)
+                    .backgroundColor(mHintColor)
+                    .title(getString(R.string.hint_create_item))
+                    .titleStyle(0, Gravity.CENTER)
+                    .build()
+                    .show();
         }
         mTasksCursorAdapter.swapCursor(data);
     }

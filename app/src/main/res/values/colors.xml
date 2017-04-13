@@ -46,6 +46,7 @@
     <color name="picker_grey">#455a64</color>
     <color name="picker_deep_red">#d32f2f</color>
     <color name="picker_deep_yellow">#f57f17</color>
+    <color name="transparent_red">#bfd32f2f</color>
 
     <array name="picker_color">
         <item>@color/picker_red</item>

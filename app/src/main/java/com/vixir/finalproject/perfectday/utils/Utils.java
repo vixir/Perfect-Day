@@ -2,6 +2,7 @@ package com.vixir.finalproject.perfectday.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.vixir.finalproject.perfectday.utils.Constants.FIRST_TIME_LOGIN;
 
 public class Utils {
 
@@ -69,6 +73,18 @@ public class Utils {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
+    }
+
+    public static boolean isFirstTimeLogin(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(FIRST_TIME_LOGIN, MODE_PRIVATE);
+        Boolean isFirstTime = prefs.getBoolean(Constants.IS_FIRST_TIME, false);
+        return isFirstTime;
+    }
+
+    public static void changeFirstTimeLogin(Context context) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(FIRST_TIME_LOGIN, MODE_PRIVATE).edit();
+        editor.putBoolean(Constants.IS_FIRST_TIME, false);
+        editor.apply();
     }
 
 
