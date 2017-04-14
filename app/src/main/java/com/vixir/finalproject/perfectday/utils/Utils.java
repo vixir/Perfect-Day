@@ -18,9 +18,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
+import com.vixir.finalproject.perfectday.activities.LoginActivity;
+import com.vixir.finalproject.perfectday.activities.MainActivity;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
+import com.vixir.finalproject.perfectday.model.TaskItem;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.vixir.finalproject.perfectday.utils.Constants.FIRST_TIME_LOGIN;
@@ -102,5 +112,47 @@ public class Utils {
             context.startService(updateProgressIntent);
         }
     }
+
+    public static void fetchDataFromFirebase(final Context context) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        final DatabaseReference child = mDatabase.child(user.getUid()).child(TaskItemsContract.PATH_TASK_ITEMS);
+        child.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ContentValues[] contentValuesArray = new ContentValues[(int) dataSnapshot.getChildrenCount()];
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                int i = 0;
+                for (DataSnapshot child : children) {
+                    TaskItem value = child.getValue(TaskItem.class);
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION, value.getDescription());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, value.getIsFinished());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, value.getIsToday()); // no boolean in content providers
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR, value.getColor());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_CREATED_AT, System.currentTimeMillis());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, value.getStreak());
+                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES, value.getListDates());
+                    contentValuesArray[i++] = contentValues;
+                }
+                context.getContentResolver().bulkInsert(TaskItemsContract.TaskItemsColumns.CONTENT_URI, contentValuesArray);
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
+                if (context instanceof LoginActivity) {
+                    ((LoginActivity) context).finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        UpdateProgressUtilities.scheduleUpdateProgressReminder(context);
+    }
+
 
 }

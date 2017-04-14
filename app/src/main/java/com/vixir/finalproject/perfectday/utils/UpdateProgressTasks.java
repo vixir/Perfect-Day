@@ -31,7 +31,6 @@ public class UpdateProgressTasks {
     public static final String ACTION_UPDATE_FIREBASE_DB = "update-firebase-db";
     public static final String ACTION_SEND_DATA_TO_WIDGET = "send-data-widget";
     public static final String UNIQUE_DAYS_KEY = "uniqueDays";
-    public static final String ACTION_FETCH_FIREBASE_DB = "get-data-firebase";
     public static final String WIDGET_DATA = "widget-data";
     private static final String TAG = UpdateProgressTasks.class.getSimpleName();
     public static final String ACTION_UPDATE_TODAY_INFORMATION = "update-today-info";
@@ -41,8 +40,6 @@ public class UpdateProgressTasks {
             updateFirebaseDatabase(context);
         } else if (ACTION_SEND_DATA_TO_WIDGET.equals(action)) {
             sendCursorDataToWidgetProvider(context);
-        } else if (ACTION_FETCH_FIREBASE_DB.equals(action)) {
-            fetchDataFromFirebase(context);
         } else if (ACTION_UPDATE_TODAY_INFORMATION.equals(action)) {
             updateDateInformation(context);
         }
@@ -149,43 +146,6 @@ public class UpdateProgressTasks {
         userId.setValue(usersTask);
 
 
-    }
-
-    private static void fetchDataFromFirebase(final Context context) {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        final DatabaseReference child = mDatabase.child(user.getUid()).child(TaskItemsContract.PATH_TASK_ITEMS);
-        child.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ContentValues[] contentValuesArray = new ContentValues[(int) dataSnapshot.getChildrenCount()];
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                int i = 0;
-                for (DataSnapshot child : children) {
-                    TaskItem value = child.getValue(TaskItem.class);
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION, value.getDescription());
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_FINISHED, value.getIsFinished());
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY, value.getIsToday()); // no boolean in content providers
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR, value.getColor());
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_CREATED_AT, System.currentTimeMillis());
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_STREAK, value.getStreak());
-                    contentValues.put(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COMPLETED_DATES, value.getListDates());
-                    contentValuesArray[i++] = contentValues;
-                }
-                context.getContentResolver().bulkInsert(TaskItemsContract.TaskItemsColumns.CONTENT_URI, contentValuesArray);
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        UpdateProgressUtilities.scheduleUpdateProgressReminder(context);
     }
 
     private static void sendCursorDataToWidgetProvider(Context context) {

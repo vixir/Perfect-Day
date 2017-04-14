@@ -27,6 +27,7 @@ import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
 import com.vixir.finalproject.perfectday.utils.Constants;
 import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
+import com.vixir.finalproject.perfectday.utils.Utils;
 
 import java.util.Arrays;
 
@@ -100,9 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 googleLoginButton.setVisibility(View.INVISIBLE);
                 showWhiteSnackBar(R.string.sign_in_successful);
                 linearLayout.setVisibility(View.GONE);
-                Intent updateProgressIntent = new Intent(this, UpdateProgressIntentService.class);
-                updateProgressIntent.setAction(UpdateProgressTasks.ACTION_FETCH_FIREBASE_DB);
-                this.startService(updateProgressIntent);
+                Utils.fetchDataFromFirebase(LoginActivity.this);
                 return;
             } else {
                 if (response == null) {
