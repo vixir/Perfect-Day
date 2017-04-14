@@ -30,12 +30,10 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.vixir.finalproject.perfectday.UpdateProgressIntentService;
 import com.vixir.finalproject.perfectday.utils.DialogUtils;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
 import com.vixir.finalproject.perfectday.adapters.TodayTasksCursorAdapter;
-import com.vixir.finalproject.perfectday.utils.UpdateProgressTasks;
 import com.vixir.finalproject.perfectday.utils.Utils;
 import com.vixir.finalproject.perfectday.customdialogs.ItemPickerDialogFragment;
 
@@ -53,6 +51,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
     private View mView;
     private Paint p = new Paint();
     private static final int TASK_LOADER_ID = 0;
+    private static boolean mIsShowcased = false;
 
     private TodayTasksCursorAdapter mTasksCursorAdapter;
 
@@ -142,7 +141,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (null != data && data.getCount() > 0) {
             streakTitle.setVisibility(View.VISIBLE);
-            if (null != getActivity() && Utils.isFirstTimeLogin(getActivity())) {
+            if (null != getActivity() && Utils.isFirstTimeLogin(getActivity()) && mIsShowcased == false) {
                 new FancyShowCaseView.Builder(getActivity())
                         .focusOn(streakTitle)
                         .backgroundColor(mHintColor)
@@ -150,11 +149,12 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
                         .titleStyle(0, Gravity.CENTER)
                         .build()
                         .show();
+                mIsShowcased = true;
             }
         } else {
             streakTitle.setVisibility(View.INVISIBLE);
         }
-        if (null != getActivity() && Utils.isFirstTimeLogin(getActivity())) {
+        if (null != getActivity() && Utils.isFirstTimeLogin(getActivity()) && mIsShowcased == false) {
             new FancyShowCaseView.Builder(getActivity())
                     .focusOn(mAddButton)
                     .roundRectRadius(20)

@@ -1,5 +1,8 @@
 package com.vixir.finalproject.perfectday.model;
 
+import android.support.annotation.Keep;
+
+@Keep
 public class TaskItem {
 
     public TaskItem() {
