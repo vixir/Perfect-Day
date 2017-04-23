@@ -10,13 +10,13 @@
 
     <TextView
         android:id="@+id/title_dialog"
-        fontPath="fonts/BalooBhaina-Regular.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="@dimen/dialog_title_padding"
         android:text="@string/new_task"
-        tools:ignore="MissingPrefix" />
+        tools:ignore="MissingPrefix"
+        android:textSize="@dimen/appbar_title_size" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/task_description_input"
@@ -27,7 +27,7 @@
         android:hint="@string/app_name"
         android:padding="@dimen/add_edit_text_padding"
         app:met_errorColor="@color/picker_red"
-        app:met_maxCharacters="25"
+        app:met_maxCharacters="27"
         app:met_minCharacters="2"
         app:met_typeface="fonts/Montserrat-Regular.ttf" />
 

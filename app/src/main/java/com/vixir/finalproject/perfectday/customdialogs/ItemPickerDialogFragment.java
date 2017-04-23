@@ -18,6 +18,9 @@ import android.widget.Toast;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.thebluealliance.spectrum.SpectrumPalette;
 import com.vixir.finalproject.perfectday.R;
+import com.vixir.finalproject.perfectday.utils.DialogUtils;
+
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,8 +67,6 @@ public class ItemPickerDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mView = getActivity().getLayoutInflater().inflate(R.layout.task_item_picker, container);
         ButterKnife.bind(this, mView);
-        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Montserrat-Bold.ttf");
-        mdialogTitle.setTypeface(custom_font);
         int[] rainbow = getActivity().getResources().getIntArray(R.array.picker_color);
         mSpectrumPalette.setColors(rainbow);
         mSpectrumPalette.setHorizontalScrollBarEnabled(true);
@@ -78,11 +79,11 @@ public class ItemPickerDialogFragment extends DialogFragment {
         if (!task.equals("")) {
             mDescriptionInput.setText(task);
         }
-        if (selectedColor == 0) {
-            //Math.random() here
-            selectedColor = rainbow[2];
-            mdialogTitle.setHintTextColor(rainbow[2]);
+        if (getTargetRequestCode() != EDIT_ITEM) {
+            selectedColor = rainbow[new Random().nextInt(rainbow.length)];
+            mDescriptionInput.setHint(DialogUtils.getHabitHint());
         }
+
         mSpectrumPalette.setSelectedColor(selectedColor);
         mDescriptionInput.setTextColor(selectedColor);
         mSpectrumPalette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener() {
@@ -90,7 +91,6 @@ public class ItemPickerDialogFragment extends DialogFragment {
             public void onColorSelected(@ColorInt int color) {
                 selectedColor = color;
                 mDescriptionInput.setTextColor(color);
-                mdialogTitle.setHintTextColor(color);
             }
         });
         return mView;

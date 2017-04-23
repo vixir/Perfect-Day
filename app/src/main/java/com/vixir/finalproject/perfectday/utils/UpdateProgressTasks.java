@@ -144,8 +144,7 @@ public class UpdateProgressTasks {
         }
         cursor.close();
         userId.setValue(usersTask);
-
-
+        Log.e(TAG, "fire_update");
     }
 
     private static void sendCursorDataToWidgetProvider(Context context) {
