@@ -5,15 +5,14 @@
     android:orientation="horizontal"
     android:background="@color/tw__solid_white"
     android:padding="10dp">
-    <ToggleButton
+
+    <ImageView
         android:id="@+id/check_complete"
         android:layout_width="@dimen/toggle_button_width"
         android:layout_height="@dimen/toggle_button_height"
-        android:textOff=""
-        android:textOn=""
-        android:layout_gravity="center_vertical"
+        android:scaleType="fitCenter"
         android:layout_marginStart="16dp"
-        android:background="@drawable/check_complete"
+        android:src="@drawable/asl_checkable_radiobutton"
         android:contentDescription="@string/press_toggle_complete"
         />
     <TextView

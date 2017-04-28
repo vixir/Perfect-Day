@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.vixir.finalproject.perfectday.activities.CreateTaskBySpeech;
 import com.vixir.finalproject.perfectday.utils.DialogUtils;
 import com.vixir.finalproject.perfectday.R;
 import com.vixir.finalproject.perfectday.db.TaskItemsContract;
@@ -91,6 +92,12 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
         ItemPickerDialogFragment pickTaskName = ItemPickerDialogFragment.newInstance(0, "", 0);
         pickTaskName.setTargetFragment(TodayTasksFragment.this, NEW_ITEM);
         pickTaskName.show(fm, "add_item");
+    }
+
+    @OnClick(R.id.add_by_voice_button)
+    public void addItemByVoice() {
+        Intent intent = new Intent(getActivity(), CreateTaskBySpeech.class);
+        startActivity(intent);
     }
 
 

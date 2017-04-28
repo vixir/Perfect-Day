@@ -48,4 +48,7 @@
     <string name="hint_edit_task">Swipe Right to edit a task and Left to move out of today\'s list.</string>
     <string name="hint_list_task">Swipe left to delete and click on the item to view activity for the previous month.</string>
     <string name="no_tasks_created_yet">widget_no_task_message</string>
+    <string name="tap_on_mic">Tap on mic to create new task</string>
+    <string name="speech_prompt">Say your perfect day task.</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\\\'t support speech input</string>
 </resources>

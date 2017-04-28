@@ -74,17 +74,19 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         holder.mDescriptionTextView.setTextColor(color);
         holder.mStreakText.setText(streak + "");
         holder.mStreakText.setTextColor(color);
-        final ToggleButton mButton = holder.mButton;
+        final ImageView mButton = holder.mButton;
         if (isFinished == 0) {
-            mButton.setChecked(false);
-            Drawable drawable = mButton.getBackground();
+            final int[] stateSet = {android.R.attr.state_checked * (isFinished == 1 ? 1 : -1)};
+            mButton.setImageState(stateSet, true);
+            Drawable drawable = mButton.getDrawable();
             drawable = DrawableCompat.wrap(drawable);
             drawable = drawable.mutate();
             DrawableCompat.setTint(drawable, color);
             DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP);
         } else {
-            mButton.setChecked(true);
-            Drawable drawable = mButton.getBackground();
+            final int[] stateSet = {android.R.attr.state_checked * (isFinished == 1 ? 1 : -1)};
+            mButton.setImageState(stateSet, true);
+            Drawable drawable = mButton.getDrawable();
             drawable = DrawableCompat.wrap(drawable);
             drawable = drawable.mutate();
             DrawableCompat.setTint(drawable, color);
@@ -93,7 +95,15 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isFinished == 0) {
+                    final int[] stateSet = {android.R.attr.state_checked * (isFinished == 1 ? -1 : 1)};
+                    mButton.setImageState(stateSet, true);
+                } else {
+                    final int[] stateSet = {android.R.attr.state_checked * (isFinished == 1 ? -1 : 1)};
+                    mButton.setImageState(stateSet, true);
+                }
                 final ContentValues contentValues = new ContentValues();
+
                 new AsyncTask<Integer, Void, Integer>() {
                     @Override
                     protected Integer doInBackground(Integer... params) {
@@ -122,7 +132,6 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
                 }.execute(isFinished);
             }
         });
-
     }
 
     @Override
@@ -149,13 +158,13 @@ public class TodayTasksCursorAdapter extends RecyclerView.Adapter<TodayTasksCurs
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView mDescriptionTextView;
         View mMainView;
-        ToggleButton mButton;
+        ImageView mButton;
         TextView mStreakText;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_description);
-            mButton = (ToggleButton) itemView.findViewById(R.id.check_complete);
+            mButton = (ImageView) itemView.findViewById(R.id.check_complete);
             mStreakText = (TextView) itemView.findViewById(R.id.streak);
             mMainView = itemView;
         }

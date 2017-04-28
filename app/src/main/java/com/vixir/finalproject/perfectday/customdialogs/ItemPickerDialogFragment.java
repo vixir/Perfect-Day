@@ -129,6 +129,12 @@ public class ItemPickerDialogFragment extends DialogFragment {
     }
 
 
+    public void sendBackCreateResult() {
+        EditTaskDialogListener editTaskDialogListener = (EditTaskDialogListener) getTargetFragment();
+        editTaskDialogListener.onFinishedCreateDialog(mDescriptionInput.getText().toString(), selectedColor);
+    }
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -144,10 +150,5 @@ public class ItemPickerDialogFragment extends DialogFragment {
         return super.onCreateDialog(savedInstanceState);
     }
 
-
-    public void sendBackCreateResult() {
-        EditTaskDialogListener editTaskDialogListener = (EditTaskDialogListener) getTargetFragment();
-        editTaskDialogListener.onFinishedCreateDialog(mDescriptionInput.getText().toString(), selectedColor);
-    }
 
 }
