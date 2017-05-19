@@ -140,17 +140,20 @@ public class TaskItemsContentProvider extends ContentProvider {
         int tasksUpdated;
         final SQLiteDatabase db = mTaskItemsDbHelper.getWritableDatabase();
         int match = sUriMATCHER.match(uri);
-
+        db.beginTransaction();
         switch (match) {
             case ITEM_TASKS_WITH_ID: {
                 String id = uri.getPathSegments().get(1);
                 tasksUpdated = db.update(TABLE_NAME, values, "_id=?", new String[]{id});
+                db.setTransactionSuccessful();
+                db.endTransaction();
                 break;
             }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
-
+        getContext().getContentResolver().notifyChange(uri, null);
+//        mTaskItemsDbHelper.close();
         return tasksUpdated;
     }
 

@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.vixir.finalproject.perfectday.ToggleAnimator;
 import com.vixir.finalproject.perfectday.activities.CreateTaskBySpeech;
 import com.vixir.finalproject.perfectday.utils.DialogUtils;
 import com.vixir.finalproject.perfectday.R;
@@ -56,6 +58,9 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
 
     private TodayTasksCursorAdapter mTasksCursorAdapter;
 
+    private ToggleAnimator mToggleAnimator = new ToggleAnimator();
+    private DefaultItemAnimator mDefaultAnimator = new DefaultItemAnimator();
+
     @BindView(R.id.taskitems_recycler)
     RecyclerView mTodayTaskRecycler;
 
@@ -78,8 +83,7 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
         mView = inflater.inflate(R.layout.todays_task_fragment, container, false);
         ButterKnife.bind(this, mView);
         mTodayTaskRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mTasksCursorAdapter = new TodayTasksCursorAdapter(getActivity(), this);
-        mTodayTaskRecycler.setAdapter(mTasksCursorAdapter);
+        mTodayTaskRecycler.setItemAnimator(mToggleAnimator);
         mTodayTaskRecycler.setHasFixedSize(false);
         initSwipe();
         getActivity().getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
@@ -128,8 +132,8 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
             @Override
             public Cursor loadInBackground() {
                 try {
-                    Uri todaysUri = TaskItemsContract.TaskItemsColumns.CONTENT_URI.buildUpon().appendPath(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY).appendPath("1").build();
-                    return getActivity().getContentResolver().query(todaysUri,
+                    Uri todayUri = TaskItemsContract.TaskItemsColumns.CONTENT_URI.buildUpon().appendPath(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_IS_TODAY).appendPath("1").build();
+                    return getActivity().getContentResolver().query(todayUri,
                             null,
                             null,
                             null,
@@ -172,6 +176,10 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
                     .build()
                     .show();
         }
+        if (mTasksCursorAdapter == null) {
+            mTasksCursorAdapter = new TodayTasksCursorAdapter(getActivity(), this);
+            mTodayTaskRecycler.setAdapter(mTasksCursorAdapter);
+        }
         mTasksCursorAdapter.swapCursor(data);
     }
 
@@ -211,7 +219,9 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
                             .onNegative(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+//                                    mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                    // Till I learn how to do that left to right animation.
+                                    mTasksCursorAdapter.notifyDataSetChanged();
                                 }
                             }).canceledOnTouchOutside(false)
                             .positiveText(R.string.agree)
@@ -228,7 +238,9 @@ public class TodayTasksFragment extends Fragment implements LoaderManager.Loader
                         int itemDescriptionIndex = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_DESCRIPTION);
                         int backColor = cursor.getColumnIndex(TaskItemsContract.TaskItemsColumns.COLUMN_NAME_COLOR);
                         DialogUtils.callEditDialog(getActivity(), TodayTasksFragment.this, id, cursor.getString(itemDescriptionIndex), cursor.getInt(backColor));
-                        mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+//                        mTasksCursorAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                        mTasksCursorAdapter.notifyDataSetChanged();
+
                     }
                 }
             }

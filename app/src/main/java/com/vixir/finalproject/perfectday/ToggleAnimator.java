@@ -46,10 +46,10 @@ public class ToggleAnimator extends DefaultItemAnimator {
 
         boolean isFinished = holder.isFinished;
         if (isFinished) {
-            final int[] stateSet = {android.R.attr.state_checked * (-1)};
+            final int[] stateSet = {android.R.attr.state_checked * (1)};
             holder.mButton.setImageState(stateSet, false);
         } else {
-            final int[] stateSet = {android.R.attr.state_checked * (1)};
+            final int[] stateSet = {android.R.attr.state_checked * (-1)};
             holder.mButton.setImageState(stateSet, true);
         }
         return true;
@@ -73,5 +73,11 @@ public class ToggleAnimator extends DefaultItemAnimator {
     private class StateInfo extends ItemHolderInfo {
         ImageView toggleImg;
         boolean isSelected;
+    }
+
+    @Override
+    public boolean canReuseUpdatedViewHolder(@NonNull RecyclerView.ViewHolder viewHolder,
+                                             @NonNull List<Object> payloads) {
+        return !payloads.isEmpty() || super.canReuseUpdatedViewHolder(viewHolder, payloads);
     }
 }
